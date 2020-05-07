@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <ItemGroup>
+    <ProjectReference Include="..\Vaquinha.Payment\Vaquinha.Payment.csproj" />
+    <ProjectReference Include="..\Vaquinha.Domain\Vaquinha.Domain.csproj" />
+    <ProjectReference Include="..\Vaquinha.Service\Vaquinha.Service.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+</Project>
