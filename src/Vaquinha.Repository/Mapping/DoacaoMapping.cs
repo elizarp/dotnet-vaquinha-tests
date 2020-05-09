@@ -25,8 +25,8 @@ namespace Vaquinha.Repository.Mapping
                 .WithMany(e => e.Doacoes)
                 .HasForeignKey(d => d.EnderecoCobrancaId);
 
+            // nao salva os dados de cartao na base de dados
             builder.Ignore(e => e.FormaPagamento);
-            builder.Ignore(e => e.DetalheTransacao);
 
             builder.Ignore(e => e.ValidationResult);
             builder.Ignore(e => e.ErrorMessages);

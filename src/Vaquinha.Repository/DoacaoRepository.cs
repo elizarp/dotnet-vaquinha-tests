@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Vaquinha.Domain;
 using Vaquinha.Domain.Entities;
-using Vaquinha.Domain.Interfaces;
 using Vaquinha.Repository.Context;
 using Vaquinha.Repository.Provider;
 
@@ -15,11 +14,11 @@ namespace Vaquinha.Repository
         private readonly ILogger<DoacaoRepository> _logger;
         private readonly GloballAppConfig _globalSettings;
         private readonly ConvideDBConnectionProvider _convideDBConnectionProvider;
-        private readonly ConvideDBContext _convideDBContext;
+        private readonly VaquinhaOnlineDBContext _convideDBContext;
 
         public DoacaoRepository(GloballAppConfig globalSettings,
                                 ConvideDBConnectionProvider convideDBConnectionProvider,
-                                ConvideDBContext convideDBContext,
+                                VaquinhaOnlineDBContext convideDBContext,
                                 ILogger<DoacaoRepository> logger)
         {
             _globalSettings = globalSettings;
