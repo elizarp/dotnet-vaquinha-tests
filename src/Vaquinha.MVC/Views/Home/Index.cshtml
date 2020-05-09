@@ -1,8 +1,15 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model Vaquinha.Domain.ViewModels.HomeViewModel
+
+@{
+    ViewData["Title"] = "Vaquinha OnLine DIO";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Home page</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Vaquinha online DIO</h1>
+    
+    <p>
+        <input asp-for="ValorRestanteMeta" />
+        <input asp-for="ValorTotalArrecadado" />
+        <input asp-for="PorcentagemTotalArrecadado" />
+    </p>
 </div>

@@ -8,7 +8,7 @@ namespace Vaquinha.Domain.Entities
     {
         private Doacao() { }
 
-        public Doacao(Guid id, Guid dadosPessoaisId, Guid enderecoCobrancaId, Guid detalheTransacaoId, double valor,
+        public Doacao(Guid id, Guid dadosPessoaisId, Guid enderecoCobrancaId,double valor,
                       Pessoa dadosPessoais, CartaoCredito formaPagamento, Endereco enderecoCobranca)
         {
             Id = id;
@@ -16,7 +16,6 @@ namespace Vaquinha.Domain.Entities
 
             DadosPessoaisId = dadosPessoaisId;
             EnderecoCobrancaId = enderecoCobrancaId;
-            DetalheTransacaoId = detalheTransacaoId;
 
             Valor = valor;
 
@@ -29,7 +28,6 @@ namespace Vaquinha.Domain.Entities
 
         public Guid DadosPessoaisId { get; private set; }
         public Guid EnderecoCobrancaId { get; private set; }
-        public Guid DetalheTransacaoId { get; private set; }
 
         public DateTime DataHora { get; private set; }
 

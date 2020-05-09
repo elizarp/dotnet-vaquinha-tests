@@ -5,22 +5,27 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Vaquinha.Domain;
 using Vaquinha.MVC.Models;
 
 namespace Vaquinha.MVC.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IHomeInfoService _homeService;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, 
+                              IHomeInfoService homeService)
         {
             _logger = logger;
+            _homeService = homeService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var homeViewModel = await _homeService.RecuperarDadosIniciaisHomeAsync();
+            return View(homeViewModel);
         }
 
         public IActionResult Privacy()
