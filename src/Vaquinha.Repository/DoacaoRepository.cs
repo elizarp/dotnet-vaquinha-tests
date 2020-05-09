@@ -13,11 +13,11 @@ namespace Vaquinha.Repository
     {
         private readonly ILogger<DoacaoRepository> _logger;
         private readonly GloballAppConfig _globalSettings;
-        private readonly ConvideDBConnectionProvider _convideDBConnectionProvider;
+        private readonly VaquinhaOnLineDbConnectionProvider _convideDBConnectionProvider;
         private readonly VaquinhaOnlineDBContext _convideDBContext;
 
         public DoacaoRepository(GloballAppConfig globalSettings,
-                                ConvideDBConnectionProvider convideDBConnectionProvider,
+                                VaquinhaOnLineDbConnectionProvider convideDBConnectionProvider,
                                 VaquinhaOnlineDBContext convideDBContext,
                                 ILogger<DoacaoRepository> logger)
         {

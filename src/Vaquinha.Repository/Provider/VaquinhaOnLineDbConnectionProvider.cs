@@ -3,10 +3,10 @@ using System.Data;
 
 namespace Vaquinha.Repository.Provider
 {
-    public sealed class ConvideDBConnectionProvider
+    public sealed class VaquinhaOnLineDbConnectionProvider
     {
         private readonly string _connection;
-        public ConvideDBConnectionProvider(string connection)
+        public VaquinhaOnLineDbConnectionProvider(string connection)
         {
             _connection = connection;
         }

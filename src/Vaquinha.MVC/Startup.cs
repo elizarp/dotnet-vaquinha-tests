@@ -1,15 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Vaquinha.Domain;
+using Vaquinha.Payment;
+using Vaquinha.Repository;
 using Vaquinha.Repository.Context;
+using Vaquinha.Repository.Provider;
+using Vaquinha.Service;
+using Vaquinha.Service.AutoMapper;
 
 namespace Vaquinha.MVC
 {
@@ -26,7 +28,11 @@ namespace Vaquinha.MVC
         {
             services.AddControllersWithViews();
 
-            services.AddDatabaseSetup(Configuration);
+            services
+                .AddIocConfiguration(Configuration)
+                .AddAutoMapper(Configuration)
+                .AddCustomConfiguration(Configuration)
+                .AddDatabaseSetup(Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -65,5 +71,49 @@ namespace Vaquinha.MVC
 
             return services;
         }
+
+        public static IServiceCollection AddIocConfiguration(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddScoped<IHomeInfoService, HomeInfoService>();
+
+            services.AddScoped<IPaymentService, PolenPaymentService>();
+
+            services.AddScoped<IDomainNotificationService, DomainNotificationService>();
+            services.AddScoped<IDoacaoService, DoacaoService>();
+            services.AddScoped<IDoacaoRepository, DoacaoRepository>();
+
+            services.AddScoped<IHomeInfoRepository, HomeInfoRepository>();
+
+            services.AddSingleton(_ => new VaquinhaOnLineDbConnectionProvider(configuration.GetConnectionString("VaquinhaOnLineDIO")));
+
+            return services;
+        }
+
+        public static IServiceCollection AddAutoMapper(this IServiceCollection services, IConfiguration configuration)
+        {
+            var globalAppSettings = new GloballAppConfig();
+            configuration.Bind("ConfiguracoesGeralAplicacao", globalAppSettings);
+
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile<VaquinhaOnLineMappingProfile>();
+            });
+
+            var mapper = config.CreateMapper();
+            services.AddSingleton(mapper);
+
+            return services;
+        }
+
+        public static IServiceCollection AddCustomConfiguration(this IServiceCollection services, IConfiguration configuration)
+        {
+            var config = new GloballAppConfig();
+
+            configuration.Bind("ConfiguracoesGeralAplicacao", config);
+            services.AddSingleton(config);
+
+            return services;
+        }
     }
 }
+

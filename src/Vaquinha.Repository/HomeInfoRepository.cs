@@ -8,9 +8,9 @@ namespace Vaquinha.Repository
 {
     public class HomeInfoRepository : IHomeInfoRepository
     {
-        private readonly ConvideDBConnectionProvider _convideDBConnectionProvider;
+        private readonly VaquinhaOnLineDbConnectionProvider _convideDBConnectionProvider;
 
-        public HomeInfoRepository(ConvideDBConnectionProvider convideDBConnectionProvider)
+        public HomeInfoRepository(VaquinhaOnLineDbConnectionProvider convideDBConnectionProvider)
         {
             _convideDBConnectionProvider = convideDBConnectionProvider;
         }
