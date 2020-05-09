@@ -28,6 +28,7 @@ namespace Vaquinha.Domain.Entities
         public string Cidade { get; private set; }
         public string Estado { get; private set; }
         public string Telefone { get; private set; }
+
         public ICollection<Doacao> Doacoes { get; set; }
 
         public override bool Valido()

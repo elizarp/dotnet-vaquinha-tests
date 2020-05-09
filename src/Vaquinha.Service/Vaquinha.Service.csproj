@@ -1,6 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <Compile Remove="AutoMapper\PolenToConvideDezenoveMappingProfile.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Vaquinha.Repository\Vaquinha.Repository.csproj" />
     <ProjectReference Include="..\Vaquinha.Payment\Vaquinha.Payment.csproj" />
   </ItemGroup>
