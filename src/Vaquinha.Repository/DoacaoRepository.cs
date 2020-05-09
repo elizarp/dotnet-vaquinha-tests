@@ -54,7 +54,6 @@ namespace Vaquinha.Repository
                                                             SELECT D.[Id]
                                                                   ,D.[DadosPessoaisId]
                                                                   ,D.[EnderecoCobrancaId]
-                                                                  ,D.[DetalheTransacaoId]
                                                                   ,D.[Valor]
                                                                   ,D.[DataHora]
                                                                   ,P.[Id] as PessoaId

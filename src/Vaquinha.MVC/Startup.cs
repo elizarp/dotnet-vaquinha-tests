@@ -83,6 +83,7 @@ namespace Vaquinha.MVC
             services.AddScoped<IDoacaoRepository, DoacaoRepository>();
 
             services.AddScoped<IHomeInfoRepository, HomeInfoRepository>();
+            services.AddScoped<IPolenHttpServiceHelper, PolenHttpServiceHelper>();
 
             services.AddSingleton(_ => new VaquinhaOnLineDbConnectionProvider(configuration.GetConnectionString("VaquinhaOnLineDIO")));
 
