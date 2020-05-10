@@ -27,7 +27,6 @@ namespace Vaquinha.Repository.Mapping
 
             // nao salva os dados de cartao na base de dados
             builder.Ignore(e => e.FormaPagamento);
-
             builder.Ignore(e => e.ValidationResult);
             builder.Ignore(e => e.ErrorMessages);
 

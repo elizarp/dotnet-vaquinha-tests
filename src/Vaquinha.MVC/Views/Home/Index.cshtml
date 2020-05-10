@@ -4,12 +4,45 @@
     ViewData["Title"] = "Vaquinha OnLine DIO";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Vaquinha online DIO</h1>
-    
-    <p>
-        <input asp-for="ValorRestanteMeta" />
-        <input asp-for="ValorTotalArrecadado" />
-        <input asp-for="PorcentagemTotalArrecadado" />
-    </p>
-</div>
+
+    <div class="text-center">
+        <h1>Vaquinha OnLine DIO</h1>
+
+        <hr />
+
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ValorRestanteMeta)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ValorTotalArrecadado)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.QuantidadeDoadores)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.ValorRestanteMeta)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.ValorTotalArrecadado)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.QuantidadeDoadores)
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+
+        <hr />
+    </div>
+
+

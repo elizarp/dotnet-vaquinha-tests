@@ -1,31 +1,24 @@
-﻿using Dapper;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using Vaquinha.Domain;
 using Vaquinha.Domain.ViewModels;
-using Vaquinha.Repository.Provider;
+using Vaquinha.Repository.Context;
 
 namespace Vaquinha.Repository
 {
     public class HomeInfoRepository : IHomeInfoRepository
     {
-        private readonly VaquinhaOnLineDbConnectionProvider _convideDBConnectionProvider;
+        private readonly VaquinhaOnlineDBContext _dbContext;
 
-        public HomeInfoRepository(VaquinhaOnLineDbConnectionProvider convideDBConnectionProvider)
+        public HomeInfoRepository(VaquinhaOnlineDBContext dbContext)
         {
-            _convideDBConnectionProvider = convideDBConnectionProvider;
+            _dbContext = dbContext;
         }
 
         public async Task<HomeViewModel> RecuperarDadosIniciaisHomeAsync()
         {
-            using var conn = _convideDBConnectionProvider.GetConnection();
-            return await conn.QuerySingleOrDefaultAsync<HomeViewModel>(RecuperarDadosIniciaisHomeAsync_query);
+            var valorTotal = await _dbContext.Doacoes.SumAsync(a => a.Valor);
+            return new HomeViewModel { ValorTotalArrecadado = valorTotal };
         }
-
-        private readonly static string RecuperarDadosIniciaisHomeAsync_query = @"
-                                                                                SELECT
-                                                                                SUM([Valor]) AS 'ValorTotalArrecadado', 
-                                                                                COUNT(1) AS 'QuantidadeDoadores'
-                                                                                FROM [Doacao] WITH (NOLOCK)
-                                                                                ";
     }
 }

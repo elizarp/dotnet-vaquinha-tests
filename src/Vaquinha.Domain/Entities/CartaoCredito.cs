@@ -7,6 +7,8 @@ namespace Vaquinha.Domain.Entities
 {
     public class CartaoCredito : Entity
     {
+        private CartaoCredito() { }
+
         public CartaoCredito(string nomeTitular, string numero, string validade, string cvv)
         {
             NomeTitular = nomeTitular;

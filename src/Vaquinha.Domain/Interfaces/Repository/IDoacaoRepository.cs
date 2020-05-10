@@ -6,7 +6,7 @@ namespace Vaquinha.Domain
 {
     public interface IDoacaoRepository
     {
-        Task<Doacao> AdicionarAsync(Doacao model);
+        Task AdicionarAsync(Doacao model);
         Task<IEnumerable<Doacao>> RecuperarDoadoesAsync(int pageIndex = 0);
     }
 }

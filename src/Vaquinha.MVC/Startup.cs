@@ -9,7 +9,6 @@ using Vaquinha.Domain;
 using Vaquinha.Payment;
 using Vaquinha.Repository;
 using Vaquinha.Repository.Context;
-using Vaquinha.Repository.Provider;
 using Vaquinha.Service;
 using Vaquinha.Service.AutoMapper;
 
@@ -29,10 +28,11 @@ namespace Vaquinha.MVC
             services.AddControllersWithViews();
 
             services
+                .AddDatabaseSetup()
                 .AddIocConfiguration(Configuration)
                 .AddAutoMapper(Configuration)
-                .AddCustomConfiguration(Configuration)
-                .AddDatabaseSetup(Configuration);
+                .AddCustomConfiguration(Configuration);
+                
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -64,11 +64,10 @@ namespace Vaquinha.MVC
 
     public static class StartupExtensions
     {
-        public static IServiceCollection AddDatabaseSetup(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddDatabaseSetup(this IServiceCollection services)
         {
-            services.AddDbContext<VaquinhaOnlineDBContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("VaquinhaOnLineDIO")));
-
+            services.AddDbContext<VaquinhaOnlineDBContext>(opt => opt.UseInMemoryDatabase("VaquinhaOnLineDIO"));
+            
             return services;
         }
 
@@ -82,10 +81,9 @@ namespace Vaquinha.MVC
             services.AddScoped<IDoacaoService, DoacaoService>();
             services.AddScoped<IDoacaoRepository, DoacaoRepository>();
 
+            services.AddScoped<IInstituicaoRepository, InstituicaoRepository>();
             services.AddScoped<IHomeInfoRepository, HomeInfoRepository>();
             services.AddScoped<IPolenHttpServiceHelper, PolenHttpServiceHelper>();
-
-            services.AddSingleton(_ => new VaquinhaOnLineDbConnectionProvider(configuration.GetConnectionString("VaquinhaOnLineDIO")));
 
             return services;
         }
