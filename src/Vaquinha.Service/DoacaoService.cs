@@ -53,25 +53,16 @@ namespace Vaquinha.Service
         public async Task<IEnumerable<DoadorViewModel>> RecuperarDoadoresAsync(int pageIndex = 0)
         {
             var doadores = await _doacaoRepository.RecuperarDoadoesAsync(pageIndex);
-            var response = _mapper.Map<IEnumerable<Doacao>, IEnumerable<DoadorViewModel>>(doadores);
-
-            return response;
+            return _mapper.Map<IEnumerable<Doacao>, IEnumerable<DoadorViewModel>>(doadores);
         }
 
-        public Task RealizarDoacaoAsync(DoacaoViewModel model)
+        public async Task RealizarDoacaoAsync(DoacaoViewModel model)
         {
-            throw new NotImplementedException();
+            //    var userDonation = _mapper.Map<Doacao, UserDonation>(doacao);
+            //    return await _polenService.AdicionadDoacaoAsync(userDonation);
+
+            var doacao = _mapper.Map<DoacaoViewModel, Doacao>(model);
+            await _doacaoRepository.AdicionarAsync(doacao);
         }
-
-        //private async Task<DoacaoDetalheTransacaoResponseModel> RealizarDoacao(Doacao doacao)
-        //{
-        //    var userDonation = _mapper.Map<Doacao, UserDonation>(doacao);
-        //    return await _polenService.AdicionadDoacaoAsync(userDonation);
-        //}
-
-        //private bool OperacaoRealizacaComSucesso(DoacaoDetalheTransacaoResponseModel detalheTransacao)
-        //{
-        //    return Convert.ToBoolean(detalheTransacao?.Success ?? "false");
-        //}
     }
 }

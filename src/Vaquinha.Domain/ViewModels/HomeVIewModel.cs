@@ -9,7 +9,7 @@ namespace Vaquinha.Domain.ViewModels
         public HomeViewModel()
         {
             Doadores = new List<DoadorViewModel>();
-            Instituicoes = new List<InstituicaoViewModel>();
+            Instituicoes = new List<CausaViewModel>();
         }
 
         [DisplayName("Valor Restante para Meta:")]
@@ -34,6 +34,6 @@ namespace Vaquinha.Domain.ViewModels
         public int TempoRestanteMinutos { get; set; }
 
         public IEnumerable<DoadorViewModel> Doadores { get; set; }
-        public IEnumerable<InstituicaoViewModel> Instituicoes { get; set; }
+        public IEnumerable<CausaViewModel> Instituicoes { get; set; }
     }
 }

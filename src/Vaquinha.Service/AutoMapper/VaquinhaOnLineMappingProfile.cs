@@ -12,7 +12,7 @@ namespace Vaquinha.Service.AutoMapper
             CreateMap<Pessoa, PessoaViewModel>();
             CreateMap<Doacao, DoacaoViewModel>();
             CreateMap<Endereco, EnderecoViewModel>();
-            CreateMap<Instituicao, InstituicaoViewModel>();
+            CreateMap<Causa, CausaViewModel>();
             CreateMap<CartaoCredito, CartaoCreditoViewModel>();
 
             CreateMap<Doacao, DoadorViewModel>()
@@ -28,8 +28,8 @@ namespace Vaquinha.Service.AutoMapper
             CreateMap<CartaoCreditoViewModel, CartaoCredito>()
                 .ConstructUsing(src => new CartaoCredito(src.NomeTitular, src.NumeroCartaoCredito, src.Validade, src.CVV));
 
-            CreateMap<InstituicaoViewModel, Instituicao>()
-                .ConstructUsing(src => new Instituicao(Guid.NewGuid(), src.Nome, src.Cidade, src.Estado));
+            CreateMap<CausaViewModel, Causa>()
+                .ConstructUsing(src => new Causa(Guid.NewGuid(), src.Nome, src.Cidade, src.Estado));
 
             CreateMap<EnderecoViewModel, Endereco>()
                 .ConstructUsing(src => new Endereco(Guid.NewGuid(), src.CEP, src.TextoEndereco, src.Complemento, src.Cidade, src.Estado, src.Telefone, src.Numero));

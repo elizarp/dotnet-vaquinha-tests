@@ -4,8 +4,9 @@ using Vaquinha.Domain.Entities;
 
 namespace Vaquinha.Domain
 {
-    public interface IInstituicaoRepository
+    public interface ICausaRepository
     {
-        Task<IEnumerable<Instituicao>> RecuperarInstituicoes();
+        Task<Causa> Adicionar(Causa causa);
+        Task<IEnumerable<Causa>> RecuperarCausas();
     }
 }

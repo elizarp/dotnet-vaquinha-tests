@@ -4,9 +4,9 @@ using Vaquinha.Domain.Entities;
 
 namespace Vaquinha.Repository.Mapping
 {
-    public class InstituicaoMapping : IEntityTypeConfiguration<Instituicao>
+    public class CausaMapping : IEntityTypeConfiguration<Causa>
     {
-        public void Configure(EntityTypeBuilder<Instituicao> builder)
+        public void Configure(EntityTypeBuilder<Causa> builder)
         {
             builder.HasKey(a => a.Id);
 
@@ -25,7 +25,7 @@ namespace Vaquinha.Repository.Mapping
             builder.Ignore(e => e.ValidationResult);
             builder.Ignore(e => e.ErrorMessages);
 
-            builder.ToTable("Instituicao");
+            builder.ToTable("Causa");
         }
     }
 }

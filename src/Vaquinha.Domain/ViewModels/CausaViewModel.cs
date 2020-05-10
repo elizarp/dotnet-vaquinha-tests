@@ -1,6 +1,6 @@
 ﻿namespace Vaquinha.Domain.ViewModels
 {
-    public class InstituicaoViewModel
+    public class CausaViewModel
     {
         public string Nome { get; set; }
         public string Cidade { get; set; }

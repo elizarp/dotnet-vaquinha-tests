@@ -15,28 +15,28 @@ namespace Vaquinha.Service
         private readonly IPaymentService _polenService;
         private readonly GloballAppConfig _globalSettings;
         private readonly IHomeInfoRepository _homeRepository;
-        private readonly IInstituicaoRepository _instituicaoRepository;
+        private readonly ICausaRepository _causaRepository;
 
         public HomeInfoService(IMapper mapper,
                                IDoacaoService doacaoService,
                                IPaymentService polenService,
                                GloballAppConfig globalSettings,
-                               IHomeInfoRepository homeRepository, 
-                               IInstituicaoRepository instituicaoRepository)
+                               IHomeInfoRepository homeRepository,
+                               ICausaRepository causaRepotirory)
         {
             _mapper = mapper;
             _doacaoService = doacaoService;
             _polenService = polenService;
             _homeRepository = homeRepository;
             _globalSettings = globalSettings;
-            _instituicaoRepository = instituicaoRepository;
+            _causaRepository = causaRepotirory;
         }
 
         public async Task<HomeViewModel> RecuperarDadosIniciaisHomeAsync()
         {
             var dadosIniciaisHome = await RecuperarDadosTotaisHome();
 
-            var instituicoes = RecuperarInstituicoesAsync();
+            var instituicoes = RecuperarCausasAsync();
             var doacoes = RecuperarDoadoresAsync();
 
             var diffDate = _globalSettings.DataFimCampanha.Subtract(DateTime.Now);
@@ -60,10 +60,11 @@ namespace Vaquinha.Service
             return await _homeRepository.RecuperarDadosIniciaisHomeAsync();
         }
 
-        public async Task<IEnumerable<InstituicaoViewModel>> RecuperarInstituicoesAsync()
+        public async Task<IEnumerable<CausaViewModel>> RecuperarCausasAsync()
         {
-            var instituicoes = await _instituicaoRepository.RecuperarInstituicoes();
-            return _mapper.Map<IEnumerable<Instituicao>, IEnumerable<InstituicaoViewModel>>(instituicoes);
+            //var causasPolen = await _polenService.RecuperarInstituicoesAsync();
+            var instituicoes = await _causaRepository.RecuperarCausas();
+            return _mapper.Map<IEnumerable<Causa>, IEnumerable<CausaViewModel>>(instituicoes);
         }
 
         private async Task<IEnumerable<DoadorViewModel>> RecuperarDoadoresAsync()

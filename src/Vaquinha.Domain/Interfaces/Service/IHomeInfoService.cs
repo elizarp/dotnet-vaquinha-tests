@@ -7,6 +7,6 @@ namespace Vaquinha.Domain
     public interface IHomeInfoService
     {
         Task<HomeViewModel> RecuperarDadosIniciaisHomeAsync();        
-        Task<IEnumerable<InstituicaoViewModel>> RecuperarInstituicoesAsync();
+        Task<IEnumerable<CausaViewModel>> RecuperarCausasAsync();
     }
 }

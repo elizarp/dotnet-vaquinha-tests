@@ -30,7 +30,7 @@ namespace Vaquinha.Payment
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<InstituicaoViewModel>> RecuperarInstituicoesAsync(int page = 0)
+        public async Task<IEnumerable<CausaViewModel>> RecuperarInstituicoesAsync(int page = 0)
         {
             var resource = "api/v1/cause".ToPolenCausesQueryStringParameters(page, _globallAppConfig);
             var response = await _httpServiceHelper.ExecuteGetRequestAsync<CauseResponse>(resource);
@@ -39,7 +39,7 @@ namespace Vaquinha.Payment
 
             response.Results = response.Results.Where(a => a.Active);
 
-            return _mapper.Map<CauseResponse, IEnumerable<InstituicaoViewModel>>(response);
+            return _mapper.Map<CauseResponse, IEnumerable<CausaViewModel>>(response);
         }
     }
 }

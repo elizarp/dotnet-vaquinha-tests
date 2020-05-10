@@ -1,0 +1,103 @@
+﻿@model Vaquinha.Domain.ViewModels.DoacaoViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<form asp-action="Create">
+    <div class="row">
+        <div class="col-md-6">
+
+            <fieldset>
+                <legend>VALOR PARA DOAÇÃO</legend>
+                <div class="form-group">
+                    <input asp-for="Valor" placeholder="Valor" class="form-control" />
+                </div>
+            </fieldset>
+
+            <hr>
+
+            <fieldset>
+                <legend>DADOS PESSOAIS</legend>
+
+                <div class="form-group">
+                    <input asp-for="DadosPessoais.Nome" placeholder="Nome Completo" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <input asp-for="DadosPessoais.Email" placeholder="Email" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <textarea name="MensagemApoio" asp-for="DadosPessoais.MensagemApoio" class="form-control"
+                              placeholder="Deixa aqui uma mensagem de apoio" data-val-maxlength-max="5000" data-val="true"></textarea>
+                </div>
+
+                <div class="form-group float-right">
+                    <label asp-for="DadosPessoais.Anonima" class="control-label"></label>
+                    <input asp-for="DadosPessoais.Anonima" />
+                </div>
+
+            </fieldset>
+        </div>
+        <div class="col-md-6">
+
+            <fieldset>
+                <legend>DADOS PARA PAGAMENTO</legend>
+                <div class="form-group">
+                    <input asp-for="FormaPagamento.NumeroCartaoCredito" placeholder="Nome do Titular" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <input asp-for="FormaPagamento.NumeroCartaoCredito" placeholder="Numero do Cartão" class="form-control" />
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input asp-for="FormaPagamento.Validade" placeholder="Data de validade" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input asp-for="FormaPagamento.CVV" placeholder="CVV" class="form-control" />
+                    </div>
+                </div>
+            </fieldset>
+
+            <hr>
+
+            <fieldset>
+                <legend>ENDEREÇO DE COBRANÇA</legend>
+
+                <div class="form-group">
+                    <input asp-for="DadosPessoais.Nome" placeholder="Nome Completo" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <input asp-for="DadosPessoais.Email" placeholder="Email" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <textarea name="MensagemApoio" asp-for="DadosPessoais.MensagemApoio" class="form-control"
+                              placeholder="Deixa aqui uma mensagem de apoio" data-val-maxlength-max="5000" data-val="true"></textarea>
+                </div>
+
+                <div class="form-group float-right">
+                    <label asp-for="DadosPessoais.Anonima" class="control-label"></label>
+                    <input asp-for="DadosPessoais.Anonima" />
+                </div>
+
+            </fieldset>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Voltar</a>
+    </div>
+
+
+    @*<div class="form-group">
+            <input type="submit" value="Doar" class="btn btn-primary" />
+        </div>*@
+
+</form>

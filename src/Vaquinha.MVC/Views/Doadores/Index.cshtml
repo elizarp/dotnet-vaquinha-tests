@@ -1,7 +1,45 @@
-﻿@{
-    ViewData["Title"] = "Doadores";
+﻿@model IEnumerable<Vaquinha.Domain.ViewModels.DoadorViewModel>
+
+@{
+    ViewData["Title"] = "Index";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Doadores</h1>    
-</div>
+<h1>Veja quem já doou!</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MensagemApoio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Valor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DescricaoTempo)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @{var nome = @item.Anonima ? "Doação Anônima" : @item.Nome;}
+                <span>@nome</span>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MensagemApoio)
+            </td>
+            <td>
+               <span>@item.Valor.ToString("C")</span>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DescricaoTempo)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

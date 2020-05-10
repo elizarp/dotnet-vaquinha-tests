@@ -25,14 +25,14 @@ namespace Vaquinha.MVC
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
             services
                 .AddDatabaseSetup()
                 .AddIocConfiguration(Configuration)
                 .AddAutoMapper(Configuration)
                 .AddCustomConfiguration(Configuration);
-                
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -73,16 +73,17 @@ namespace Vaquinha.MVC
 
         public static IServiceCollection AddIocConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddScoped<ICausaService, CausaService>();
             services.AddScoped<IHomeInfoService, HomeInfoService>();
-
             services.AddScoped<IPaymentService, PolenPaymentService>();
 
             services.AddScoped<IDomainNotificationService, DomainNotificationService>();
             services.AddScoped<IDoacaoService, DoacaoService>();
             services.AddScoped<IDoacaoRepository, DoacaoRepository>();
 
-            services.AddScoped<IInstituicaoRepository, InstituicaoRepository>();
+            services.AddScoped<ICausaRepository, CausaRepository>();
             services.AddScoped<IHomeInfoRepository, HomeInfoRepository>();
+
             services.AddScoped<IPolenHttpServiceHelper, PolenHttpServiceHelper>();
 
             return services;

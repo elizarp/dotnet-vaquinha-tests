@@ -3,11 +3,11 @@ using Vaquinha.Domain.Base;
 
 namespace Vaquinha.Domain.Entities
 {
-    public class Instituicao : Entity
+    public class Causa : Entity
     {
-        private Instituicao() { }
+        private Causa() { }
 
-        public Instituicao(Guid id, string nome, string cidade, string estado)
+        public Causa(Guid id, string nome, string cidade, string estado)
         {
             Id = id;
             Nome = nome;

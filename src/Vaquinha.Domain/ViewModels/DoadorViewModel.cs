@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace Vaquinha.Domain.ViewModels
 {
@@ -14,6 +15,7 @@ namespace Vaquinha.Domain.ViewModels
 
         public DateTime DataHora { get;  set; }
 
+        [DisplayName("Quando?")]
         public string DescricaoTempo => GerarDescricaoTempo();
 
         private string GerarDescricaoTempo()
