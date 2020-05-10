@@ -27,10 +27,10 @@ namespace Vaquinha.MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Index(DoacaoViewModel model)
+        public IActionResult Create(DoacaoViewModel model)
         {
-            await _doacaoService.RealizarDoacaoAsync(model);
-            return RedirectToAction("Index");
+            _doacaoService.RealizarDoacaoAsync(model);
+            return RedirectToAction("Index","Home");
         }
     }
 }

@@ -59,8 +59,11 @@ html {
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+    font-family: sans-serif;
+    
+    background-image: url('../images/so-white.png');
 }
 .footer {
   position: absolute;
