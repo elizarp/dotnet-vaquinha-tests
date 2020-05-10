@@ -29,7 +29,7 @@ namespace Vaquinha.MVC
             services.AddControllersWithViews().AddNToastNotifyNoty(new NotyOptions
             {
                 ProgressBar = true,
-                Timeout = 5000                
+                Timeout = 5000,
             }).AddRazorRuntimeCompilation();
 
             services

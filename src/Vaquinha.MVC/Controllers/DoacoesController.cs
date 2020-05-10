@@ -8,7 +8,7 @@ namespace Vaquinha.MVC.Controllers
 {
     public class DoacoesController : BaseController
     {
-        private readonly IDoacaoService _doacaoService;        
+        private readonly IDoacaoService _doacaoService;
         private readonly IDomainNotificationService _domainNotificationService;
 
         public DoacoesController(IDoacaoService doacaoService,
@@ -42,7 +42,7 @@ namespace Vaquinha.MVC.Controllers
                 return View(model);
             }
 
-            AdicionarNotificacaoOperacaoRealizadaComSucesso();
+            AdicionarNotificacaoOperacaoRealizadaComSucesso("Doação realizada com sucesso!<p>Obrigado por apoiar nossa causa :)</p>");
             return RedirectToAction("Index", "Home");
         }
 

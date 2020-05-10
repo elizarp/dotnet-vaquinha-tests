@@ -29,7 +29,9 @@ namespace Vaquinha.MVC.Controllers
                 : null;
 
             if (!string.IsNullOrEmpty(errorMessage))
+            {
                 _toastNotification.AddErrorToastMessage(errorMessage);
+            }
         }
     }
 }

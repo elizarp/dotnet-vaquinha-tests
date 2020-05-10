@@ -26,6 +26,8 @@ namespace Vaquinha.Service
         {
             var entity = _mapper.Map<DoacaoViewModel, Doacao>(model);
 
+            entity.AtualizarDataCompra();
+
             if (entity.Valido())
             {
                 await _doacaoRepository.AdicionarAsync(entity);

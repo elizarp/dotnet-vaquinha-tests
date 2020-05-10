@@ -1,16 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+using Vaquinha.Domain;
 
 namespace Vaquinha.MVC.Controllers
 {
     public class DoadoresController : Controller
     {
-        public IActionResult Index()
+        private readonly IDoacaoService _doacaoService;
+
+        public DoadoresController(IDoacaoService doacaoService)
         {
-            return View();
+            _doacaoService = doacaoService;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            return View(await _doacaoService.RecuperarDoadoresAsync());
         }
     }
 }
