@@ -17,8 +17,14 @@ namespace Vaquinha.Repository
 
         public async Task<HomeViewModel> RecuperarDadosIniciaisHomeAsync()
         {
-            var valorTotal = await _dbContext.Doacoes.SumAsync(a => a.Valor);
-            return new HomeViewModel { ValorTotalArrecadado = valorTotal };
+            var totalDoadores = _dbContext.Doacoes.CountAsync();
+            var valorTotal = _dbContext.Doacoes.SumAsync(a => a.Valor);
+
+            return new HomeViewModel
+            {
+                ValorTotalArrecadado = await valorTotal,
+                QuantidadeDoadores = await totalDoadores
+            };
         }
     }
 }

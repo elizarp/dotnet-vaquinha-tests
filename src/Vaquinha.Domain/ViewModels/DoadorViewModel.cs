@@ -7,8 +7,10 @@ namespace Vaquinha.Domain.ViewModels
     {
         public string Nome { get; set; }
 
+        [DisplayName("Doação anonima?")]
         public bool Anonima { get; set; }
 
+        [DisplayName("Mensagem de apoio")]
         public string MensagemApoio { get;  set; }
 
         public decimal Valor { get;  set; }
