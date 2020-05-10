@@ -1,23 +1,28 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using NToastNotify;
+using System.Threading.Tasks;
 using Vaquinha.Domain;
 using Vaquinha.Domain.ViewModels;
 
 namespace Vaquinha.MVC.Controllers
 {
-    public class DoacoesController : Controller
+    public class DoacoesController : BaseController
     {
-        private readonly IDoacaoService _doacaoService;
+        private readonly IDoacaoService _doacaoService;        
+        private readonly IDomainNotificationService _domainNotificationService;
 
-        public DoacoesController(IDoacaoService doacaoService)
+        public DoacoesController(IDoacaoService doacaoService,
+                                 IDomainNotificationService domainNotificationService,
+                                 IToastNotification toastNotification) : base(domainNotificationService, toastNotification)
         {
             _doacaoService = doacaoService;
+            _domainNotificationService = domainNotificationService;
         }
 
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            return View(await _doacaoService.RecuperarDoadoresAsync());
+            return View(nameof(Index), await _doacaoService.RecuperarDoadoresAsync());
         }
 
         [HttpGet]
@@ -30,7 +35,20 @@ namespace Vaquinha.MVC.Controllers
         public IActionResult Create(DoacaoViewModel model)
         {
             _doacaoService.RealizarDoacaoAsync(model);
-            return RedirectToAction("Index","Home");
+
+            if (PossuiErrosDominio())
+            {
+                AdicionarErrosDominio();
+                return View(model);
+            }
+
+            AdicionarNotificacaoOperacaoRealizadaComSucesso();
+            return RedirectToAction("Index", "Home");
+        }
+
+        private bool PossuiErrosDominio()
+        {
+            return _domainNotificationService.PossuiErros;
         }
     }
 }

@@ -10,6 +10,7 @@ namespace Vaquinha.Domain
     {
         bool PossuiErros { get; }
         IEnumerable<DomainNotification> RecuperarErrosDominio();
+        string RecuperarErrosDominioFormatadoHtml();
 
         void Adicionar<T>(T entity) where T : Entity;
 
@@ -73,6 +74,12 @@ namespace Vaquinha.Domain
         private static bool CampoPreenchido(DomainNotification notification)
         {
             return !string.IsNullOrEmpty(notification.MensagemErro);
+        }
+
+        public string RecuperarErrosDominioFormatadoHtml()
+        {
+            var errors = string.Join("", RecuperarErrosDominio().Select(a => $"<li>{a.MensagemErro}</li>").ToArray());
+            return $"<ul>{errors}</ul>";
         }
     }
 }

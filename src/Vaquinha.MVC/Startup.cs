@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NToastNotify;
 using Vaquinha.Domain;
 using Vaquinha.Payment;
 using Vaquinha.Repository;
@@ -25,7 +26,11 @@ namespace Vaquinha.MVC
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            services.AddControllersWithViews().AddNToastNotifyNoty(new NotyOptions
+            {
+                ProgressBar = true,
+                Timeout = 5000                
+            }).AddRazorRuntimeCompilation();
 
             services
                 .AddDatabaseSetup()
@@ -59,6 +64,8 @@ namespace Vaquinha.MVC
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            app.UseNToastNotify();
         }
     }
 
@@ -67,7 +74,7 @@ namespace Vaquinha.MVC
         public static IServiceCollection AddDatabaseSetup(this IServiceCollection services)
         {
             services.AddDbContext<VaquinhaOnlineDBContext>(opt => opt.UseInMemoryDatabase("VaquinhaOnLineDIO"));
-            
+
             return services;
         }
 

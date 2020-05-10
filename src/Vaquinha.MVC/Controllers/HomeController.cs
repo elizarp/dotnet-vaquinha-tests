@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using NToastNotify;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -13,12 +14,15 @@ namespace Vaquinha.MVC.Controllers
     {
         private readonly IHomeInfoService _homeService;
         private readonly ILogger<HomeController> _logger;
+        private readonly IToastNotification _toastNotification;
 
-        public HomeController(ILogger<HomeController> logger, 
-                              IHomeInfoService homeService)
+        public HomeController(ILogger<HomeController> logger,
+                              IHomeInfoService homeService,
+                              IToastNotification toastNotification)
         {
             _logger = logger;
             _homeService = homeService;
+            _toastNotification = toastNotification;
         }
 
         public async Task<IActionResult> Index()
@@ -26,7 +30,7 @@ namespace Vaquinha.MVC.Controllers
             var homeViewModel = await _homeService.RecuperarDadosIniciaisHomeAsync();
 
             // mocado para testes de carousel ( remover aapós ajustes )
-            homeViewModel.Doadores = new List<DoadorViewModel> { new DoadorViewModel {Nome = "Doador 1"}, new DoadorViewModel { Nome = "Doador 2" } , new DoadorViewModel { Nome = "Doador 3" } };
+            homeViewModel.Doadores = new List<DoadorViewModel> { new DoadorViewModel { Nome = "Doador 1" }, new DoadorViewModel { Nome = "Doador 2" }, new DoadorViewModel { Nome = "Doador 3" } };
             homeViewModel.Instituicoes = new List<CausaViewModel> { new CausaViewModel { Nome = "Instituicao 1" }, new CausaViewModel { Nome = "Instituicao 1" }, new CausaViewModel { Nome = "Instituicao 3" } };
 
             // adicionar carousel para instituicoes
