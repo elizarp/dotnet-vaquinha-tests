@@ -45,6 +45,13 @@ namespace Vaquinha.Domain.Entities
             DadosPessoais = pessoa;
         }
 
+        public void AdicionarEnderecoCobranca(Endereco endereco) {
+            EnderecoCobranca = endereco;
+        }
+        public void AdicionarFormaPagamento(CartaoCredito formaPagamento) {
+            FormaPagamento = formaPagamento;
+        }
+
         public override bool Valido()
         {
             ValidationResult = new DoacaoValidacao().Validate(this);
