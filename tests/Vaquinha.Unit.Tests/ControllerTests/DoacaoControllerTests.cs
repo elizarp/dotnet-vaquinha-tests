@@ -1,121 +1,121 @@
 ﻿using AutoMapper;
+using FluentAssertions;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using Moq;
-using Xunit;
-using Vaquinha.MVC.Controllers;
+using NToastNotify;
 using Vaquinha.Domain;
 using Vaquinha.Domain.Entities;
+using Vaquinha.Domain.ViewModels;
+using Vaquinha.MVC.Controllers;
 using Vaquinha.Service;
 using Vaquinha.Tests.Fixtures;
-using Vaquinha.Tests.Extensions;
-using System.Net;
-using FluentAssertions;
-using System.Collections.Generic;
-using System;
-using Microsoft.Extensions.Caching.Memory;
-using Vaquinha.Domain.ViewModels;
-using NToastNotify;
-using Microsoft.AspNetCore.Mvc;
+using Xunit;
 
 namespace Vaquinha.Tests.ControllerTests
 {
-	[Collection(nameof(DoacaoFixtureCollection))]
-	public class DoacaoControllerTests
-	{
-		private readonly Mock<IDoacaoRepository> _doacaoRepository = new Mock<IDoacaoRepository>();
-		private readonly Mock<IMemoryCache> _memoryCache = new Mock<IMemoryCache>();
-		private readonly Mock<GloballAppConfig> _globallAppConfig = new Mock<GloballAppConfig>();
+    [Collection(nameof(DoacaoFixtureCollection))]
+    public class DoacaoControllerTests
+    {
+        private readonly Mock<IDoacaoRepository> _doacaoRepository = new Mock<IDoacaoRepository>();
+        private readonly Mock<IMemoryCache> _memoryCache = new Mock<IMemoryCache>();
+        private readonly Mock<GloballAppConfig> _globallAppConfig = new Mock<GloballAppConfig>();
 
-		private readonly DoacaoFixture _doacaoFixture;
-		private readonly EnderecoFixture _enderecoFixture;
-		private readonly CartaoCreditoFixture _cartaoCreditoFixture;
+        private readonly DoacaoFixture _doacaoFixture;
+        private readonly EnderecoFixture _enderecoFixture;
+        private readonly CartaoCreditoFixture _cartaoCreditoFixture;
 
-		private DoacoesController _doacaoController;
-		private readonly IDoacaoService _doacaoService;
+        private DoacoesController _doacaoController;
+        private readonly IDoacaoService _doacaoService;
 
-		private Mock<IMapper> _mapper;		
-		private Mock<IPaymentService> _polenService = new Mock<IPaymentService>();
-		private Mock<ILogger<DoacoesController>> _logger = new Mock<ILogger<DoacoesController>>();
+        private Mock<IMapper> _mapper;
+        private Mock<IPaymentService> _polenService = new Mock<IPaymentService>();
+        private Mock<ILogger<DoacoesController>> _logger = new Mock<ILogger<DoacoesController>>();
 
-		private IDomainNotificationService _domainNotificationService = new DomainNotificationService();
+        private IDomainNotificationService _domainNotificationService = new DomainNotificationService();
 
-		private Mock<IToastNotification> _toastNotification = new Mock<IToastNotification>();
+        private Mock<IToastNotification> _toastNotification = new Mock<IToastNotification>();
 
-		private readonly Doacao _doacaoValida;
-		private readonly DoacaoViewModel _doacaoModelValida;
+        private readonly Doacao _doacaoValida;
+        private readonly DoacaoViewModel _doacaoModelValida;
 
-		public DoacaoControllerTests(DoacaoFixture doacaoFixture, EnderecoFixture enderecoFixture, CartaoCreditoFixture cartaoCreditoFixture)
-		{
-			_doacaoFixture = doacaoFixture;
-			_enderecoFixture = enderecoFixture;
-			_cartaoCreditoFixture = cartaoCreditoFixture;
+        public DoacaoControllerTests(DoacaoFixture doacaoFixture, EnderecoFixture enderecoFixture, CartaoCreditoFixture cartaoCreditoFixture)
+        {
+            _doacaoFixture = doacaoFixture;
+            _enderecoFixture = enderecoFixture;
+            _cartaoCreditoFixture = cartaoCreditoFixture;
 
-			_mapper = new Mock<IMapper>();
-			
-			_doacaoValida = doacaoFixture.DoacaoValida();
-			_doacaoValida.AdicionarEnderecoCobranca(enderecoFixture.EnderecoValido());
-			_doacaoValida.AdicionarFormaPagamento(cartaoCreditoFixture.CartaoCreditoValido());
+            _mapper = new Mock<IMapper>();
 
-			_doacaoModelValida = doacaoFixture.DoacaoModelValida();
-			_doacaoModelValida.EnderecoCobranca = enderecoFixture.EnderecoModelValido();
-			_doacaoModelValida.FormaPagamento = cartaoCreditoFixture.CartaoCreditoModelValido();
+            _doacaoValida = doacaoFixture.DoacaoValida();
+            _doacaoValida.AdicionarEnderecoCobranca(enderecoFixture.EnderecoValido());
+            _doacaoValida.AdicionarFormaPagamento(cartaoCreditoFixture.CartaoCreditoValido());
 
-			//_polenUserDonationValida = _polenUserDonationFixture.PolenUserDonationValida();
-			//_doacaoDetalheTransacaoValida = _doacaoDetalheTransacaoFixture.DoacaoDetalheTransacaoValida();
+            _doacaoModelValida = doacaoFixture.DoacaoModelValida();
+            _doacaoModelValida.EnderecoCobranca = enderecoFixture.EnderecoModelValido();
+            _doacaoModelValida.FormaPagamento = cartaoCreditoFixture.CartaoCreditoModelValido();
 
-			_mapper.Setup(a => a.Map<DoacaoViewModel, Doacao>(_doacaoModelValida)).Returns(_doacaoValida);
-			//_mapper.Setup(a => a.Map<Doacao, PolenUserDonation>(_doacaoValida)).Returns(_polenUserDonationValida);
-			//_polenService.Setup(_ => _.AdicionadDoacaoAsync(_polenUserDonationValida)).ReturnsAsync(_doacaoDetalheTransacaoValida);
+            //_polenUserDonationValida = _polenUserDonationFixture.PolenUserDonationValida();
+            //_doacaoDetalheTransacaoValida = _doacaoDetalheTransacaoFixture.DoacaoDetalheTransacaoValida();
 
-			_doacaoService = new DoacaoService(_mapper.Object, _doacaoRepository.Object, _domainNotificationService);
-		}
+            _mapper.Setup(a => a.Map<DoacaoViewModel, Doacao>(_doacaoModelValida)).Returns(_doacaoValida);
+            //_mapper.Setup(a => a.Map<Doacao, PolenUserDonation>(_doacaoValida)).Returns(_polenUserDonationValida);
+            //_polenService.Setup(_ => _.AdicionadDoacaoAsync(_polenUserDonationValida)).ReturnsAsync(_doacaoDetalheTransacaoValida);
 
-		#region HTTPPOST
+            _doacaoService = new DoacaoService(_mapper.Object, _doacaoRepository.Object, _domainNotificationService);
+        }
 
-		[Trait("DoacaoController", "DoacaoController_Adicionar_RetornaDadosComSucesso")]
-		[Fact]
-		public void DoacaoController_Adicionar_RetornaDadosComSucesso()
-		{
-			// Arrange            
-			_doacaoController = new DoacoesController(_doacaoService, _domainNotificationService, _toastNotification.Object);
+        #region HTTPPOST
 
-			// Act
-			var retorno = _doacaoController.Create(_doacaoModelValida);
+        [Trait("DoacaoController", "DoacaoController_Adicionar_RetornaDadosComSucesso")]
+        [Fact]
+        public void DoacaoController_Adicionar_RetornaDadosComSucesso()
+        {
+            // Arrange            
+            _doacaoController = new DoacoesController(_doacaoService, _domainNotificationService, _toastNotification.Object);
 
-			_mapper.Verify(a => a.Map<DoacaoViewModel, Doacao>(_doacaoModelValida), Times.Once);
-			_toastNotification.Verify(a => a.AddSuccessToastMessage(It.IsAny<string>(),It.IsAny<LibraryOptions>()), Times.Once);
+            // Act
+            var retorno = _doacaoController.Create(_doacaoModelValida);
 
-			retorno.Should().BeOfType<RedirectToActionResult>();
+            _mapper.Verify(a => a.Map<DoacaoViewModel, Doacao>(_doacaoModelValida), Times.Once);
+            _toastNotification.Verify(a => a.AddSuccessToastMessage(It.IsAny<string>(), It.IsAny<LibraryOptions>()), Times.Once);
 
-			((RedirectToActionResult)retorno).ActionName.Should().Be("Index");
-			((RedirectToActionResult)retorno).ControllerName.Should().Be("Home");			
-		}
+            retorno.Should().BeOfType<RedirectToActionResult>();
 
-		[Trait("DoacaoController", "DoacaoController_AdicionarDadosInvalidos_BadRequest")]
-		[Fact]
-		public void DoacaoController_AdicionarDadosInvalidos_BadRequest()
-		{
-			// Arrange          
-			var doacao = _doacaoFixture.DoacaoInvalida();
-			var doacaoModelInvalida = new DoacaoViewModel();
-			_mapper.Setup(a => a.Map<DoacaoViewModel, Doacao>(doacaoModelInvalida)).Returns(doacao);
+            ((RedirectToActionResult)retorno).ActionName.Should().Be("Index");
+            ((RedirectToActionResult)retorno).ControllerName.Should().Be("Home");
+        }
 
-			_doacaoController = new DoacoesController(_doacaoService, _domainNotificationService, _toastNotification.Object);
+        [Trait("DoacaoController", "DoacaoController_AdicionarDadosInvalidos_BadRequest")]
+        [Fact]
+        public void DoacaoController_AdicionarDadosInvalidos_BadRequest()
+        {
+            // Arrange          
+            var doacao = _doacaoFixture.DoacaoInvalida();
+            var doacaoModelInvalida = new DoacaoViewModel();
+            _mapper.Setup(a => a.Map<DoacaoViewModel, Doacao>(doacaoModelInvalida)).Returns(doacao);
 
-			// Act
-			var retorno = _doacaoController.Create(doacaoModelInvalida);
+            _doacaoController = new DoacoesController(_doacaoService, _domainNotificationService, _toastNotification.Object);
 
-			// Assert                   
-			retorno.Should().BeOfType<ViewResult>();
+            // Act
+            var retorno = _doacaoController.Create(doacaoModelInvalida);
 
-			_mapper.Verify(a => a.Map<DoacaoViewModel, Doacao>(doacaoModelInvalida), Times.Once);
+            // Assert                   
+            retorno.Should().BeOfType<ViewResult>();
 
-			//response.Data.Should().BeNull();
-			//response.Errors.Should().NotBeNull();
-			//response.Errors.Should().BeOfType<List<DomainNotification>>();
-		}
-		
-		/*
+            _mapper.Verify(a => a.Map<DoacaoViewModel, Doacao>(doacaoModelInvalida), Times.Once);
+            _doacaoRepository.Verify(a => a.AdicionarAsync(doacao), Times.Never);
+            _toastNotification.Verify(a => a.AddErrorToastMessage(It.IsAny<string>(), It.IsAny<LibraryOptions>()), Times.Once);
+
+            var viewResult = ((ViewResult)retorno);
+
+            viewResult.Model.Should().BeOfType<DoacaoViewModel>();
+
+            ((DoacaoViewModel)viewResult.Model).Should().Be(doacaoModelInvalida);
+        }
+
+        /*
 
 		[Trait("DoacaoController", "DoacaoController_AdicionarDoacaoException_InternalServerError")]
 		[Fact]
@@ -145,7 +145,7 @@ namespace Vaquinha.Tests.ControllerTests
 			(response.Errors as string[]).Should().Contain("ERRO AO ACESSAO O BANCO DE DADOS", because: "é a mensagem de erro configurado na exceção");
 		}
 */
-		#endregion
-	}
+        #endregion
+    }
 }
 
