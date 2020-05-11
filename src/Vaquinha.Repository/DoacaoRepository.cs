@@ -16,11 +16,11 @@ namespace Vaquinha.Repository
         private readonly VaquinhaOnlineDBContext _vaquinhaOnlineDBContext;
 
         public DoacaoRepository(GloballAppConfig globalSettings,
-                                VaquinhaOnlineDBContext convideDBContext,
+                                VaquinhaOnlineDBContext vaquinhaDbContext,
                                 ILogger<DoacaoRepository> logger)
         {
             _globalSettings = globalSettings;
-            _vaquinhaOnlineDBContext = convideDBContext;
+            _vaquinhaOnlineDBContext = vaquinhaDbContext;
             _logger = logger;
         }
 
