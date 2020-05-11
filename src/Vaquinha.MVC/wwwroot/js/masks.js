@@ -13,8 +13,8 @@
         groupSeparator: ".",
         allowMinus: false,
         prefix: '',
-        digits: 2,
-        digitsOptional: false,
+        digits: 0,
+        digitsOptional: true,
         rightAlign: true,
         unmaskAsNumber: true
     });

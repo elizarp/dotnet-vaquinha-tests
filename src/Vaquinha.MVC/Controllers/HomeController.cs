@@ -1,12 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using NToastNotify;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using Vaquinha.Domain;
-using Vaquinha.Domain.ViewModels;
-using Vaquinha.MVC.Models;
 
 namespace Vaquinha.MVC.Controllers
 {

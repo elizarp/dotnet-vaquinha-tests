@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<Vaquinha.Domain.ViewModels.DoadorViewModel>
-
+@using System.Globalization
+ 
 @{
     ViewData["Title"] = "Index";
 }
@@ -34,14 +35,13 @@
             {
                 <tr>
                     <td>
-                        @{var nome = @item.Anonima ? "Doação Anônima" : @item.Nome;}
-                        <span>@nome</span>
+                        @Html.DisplayFor(modelItem => item.Nome)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.MensagemApoio)
                     </td>
                     <td>
-                        <span>@item.Valor.ToString("C")</span>
+                        <span>@item.Valor.ToString("C", CultureInfo.CreateSpecificCulture("pt-BR"))</span>
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.DescricaoTempo)
@@ -56,7 +56,6 @@
                     <center> <span class="text-center">Ainda não houveram doações. Seja você o primeiro!</span></center>
                 </td>
             </tr>
-
         }
     </tbody>
 </table>

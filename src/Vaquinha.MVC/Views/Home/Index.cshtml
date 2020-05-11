@@ -1,16 +1,19 @@
 ﻿@model Vaquinha.Domain.ViewModels.HomeViewModel
+@using System.Globalization 
 
 @{
-    ViewData["Title"] = "Vaquinha OnLine DIO";
+    ViewData["Title"] = "Vaquinha online";
 }
 
 <div class="text-center">
-    <h1>Vaquinha OnLine</h1>
+    <h3>Vaquinha online</h3>
 
     <hr />
 
-    <p>
-        <a asp-controller="Doacoes" asp-action="Create">Doe agora</a>
+    <p>        
+        <a asp-controller="Doacoes" asp-action="Create" class="btn btn-primary">
+            <span></span>doar agora
+        </a>
     </p>
 
 
@@ -18,13 +21,16 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.ValorRestanteMeta)
-                </th>
-                <th>
                     @Html.DisplayNameFor(model => model.ValorTotalArrecadado)
                 </th>
                 <th>
+                    @Html.DisplayNameFor(model => model.ValorRestanteMeta)
+                </th>
+                <th>
                     @Html.DisplayNameFor(model => model.QuantidadeDoadores)
+                </th>
+                <th>
+                    <span>Tempo Restante</span>
                 </th>
             </tr>
         </thead>
@@ -32,13 +38,16 @@
 
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => Model.ValorRestanteMeta)
+                    @Model.ValorTotalArrecadado.ToString("C", CultureInfo.CreateSpecificCulture("pt-BR"))
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => Model.ValorTotalArrecadado)
+                    @Model.ValorRestanteMeta.ToString("C", CultureInfo.CreateSpecificCulture("pt-BR"))
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => Model.QuantidadeDoadores)
+                </td>
+                <td>
+                    <code>  @Model.TempoRestanteDias dias - @Model.TempoRestanteHoras horas - @Model.TempoRestanteMinutos minutos</code>
                 </td>
             </tr>
 
@@ -49,7 +58,7 @@
     {
         <hr />
 
-        <p>Quem já doou</p>
+        <p>Quem já doou?<b><code>( ELI - ADICIONAR CAROUSEL AQUI )</code></b></p>
 
         <table class="table table-bordered table-striped">
             <thead>
@@ -64,7 +73,7 @@
             {
                 <tr>
                     <td>@item.Nome</td>
-                    <td>@item.Valor.ToString("C")</td>
+                    <td>@item.Valor.ToString("C", CultureInfo.CreateSpecificCulture("pt-BR"))</td>
                     <td>@item.MensagemApoio</td>
                     <td>@item.DescricaoTempo</td>
                 </tr>
@@ -74,15 +83,9 @@
 
     <hr />
 
-    <p>Para onde vai minha doação?</p>
+    <p>Para onde vai minha doação? <b><code>( ELI - ADICIONAR CAROUSEL AQUI )</code></b></p>
 
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <td>Instituicao</td>
-                <td>Onde?</td>
-            </tr>
-        </thead>
+    <table class="table table-bordered table-striped">        
         @foreach (var item in Model.Instituicoes)
         {
             <tr>

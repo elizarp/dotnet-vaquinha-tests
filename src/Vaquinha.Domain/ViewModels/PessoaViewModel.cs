@@ -4,7 +4,13 @@ namespace Vaquinha.Domain.ViewModels
 {
     public class PessoaViewModel
     {
-        public string Nome { get; set; }
+        private string _nome { get; set; }
+        public string Nome
+        {
+            get { return Anonima ? "Doação anonima" : _nome; }
+            set { _nome = value; }
+        }
+
         public string Email { get; set; }
 
         [DisplayName("Doação anônima")]

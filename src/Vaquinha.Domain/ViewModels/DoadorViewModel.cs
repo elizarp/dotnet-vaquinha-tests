@@ -8,7 +8,7 @@ namespace Vaquinha.Domain.ViewModels
         private string _nome { get; set; }
         public string Nome
         {
-            get { return Anonima ? "Doação anonima" : Nome; }
+            get { return Anonima ? "Doação anonima" : _nome; }
             set { _nome = value; }
         }
 

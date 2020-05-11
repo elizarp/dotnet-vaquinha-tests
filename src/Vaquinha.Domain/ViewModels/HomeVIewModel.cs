@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Vaquinha.Domain.ViewModels
 {
@@ -12,25 +11,25 @@ namespace Vaquinha.Domain.ViewModels
             Instituicoes = new List<CausaViewModel>();
         }
 
-        [DisplayName("Valor Restante para Meta:")]
+        [DisplayName("Quanto falta arrecadar?")]
         public double ValorRestanteMeta { get; set; }
 
-        [DisplayName("Valor Total Arrecadado")]
+        [DisplayName("Arrecadamos quanto?")]
         public double ValorTotalArrecadado { get; set; }
 
-        [DisplayName("Percentual Arrecadado:")]
+        [DisplayName("Percentual Arrecadado")]
         public double PorcentagemTotalArrecadado { get; set; }
 
-        [DisplayName("Quantidade de Doadores:")]
+        [DisplayName("Quantidade de Doadores")]
         public int QuantidadeDoadores { get; set; }
 
-        [DisplayName("Quantidade de Doadores:")]
+        [DisplayName("Dias Restantes")]
         public int TempoRestanteDias { get; set; }
 
-        [DisplayName("Horas Restantes:")]
+        [DisplayName("Horas Restantes")]
         public int TempoRestanteHoras { get; set; }
 
-        [DisplayName("Minutos Restantes:")]
+        [DisplayName("Minutos Restantes")]
         public int TempoRestanteMinutos { get; set; }
 
         public IEnumerable<DoadorViewModel> Doadores { get; set; }
