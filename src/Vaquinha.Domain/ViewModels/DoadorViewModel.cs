@@ -5,17 +5,22 @@ namespace Vaquinha.Domain.ViewModels
 {
     public class DoadorViewModel
     {
-        public string Nome { get; set; }
+        private string _nome { get; set; }
+        public string Nome
+        {
+            get { return Anonima ? "Doação anonima" : Nome; }
+            set { _nome = value; }
+        }
 
         [DisplayName("Doação anonima?")]
         public bool Anonima { get; set; }
 
         [DisplayName("Mensagem de apoio")]
-        public string MensagemApoio { get;  set; }
+        public string MensagemApoio { get; set; }
 
-        public decimal Valor { get;  set; }
+        public decimal Valor { get; set; }
 
-        public DateTime DataHora { get;  set; }
+        public DateTime DataHora { get; set; }
 
         [DisplayName("Quando?")]
         public string DescricaoTempo => GerarDescricaoTempo();
@@ -27,7 +32,7 @@ namespace Vaquinha.Domain.ViewModels
             if (DataHora != DateTime.MinValue)
             {
                 TimeSpan intervalo = (DateTime.Now - DataHora);
-                
+
                 if (intervalo.Days > 365)
                 {
                     var ano = intervalo.Days / 365;
@@ -76,7 +81,7 @@ namespace Vaquinha.Domain.ViewModels
                 }
 
                 descricao += " atrás";
-            }            
+            }
 
             return descricao;
         }

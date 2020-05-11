@@ -4,64 +4,99 @@
     ViewData["Title"] = "Vaquinha OnLine DIO";
 }
 
-    <div class="text-center">
-        <h1>Vaquinha OnLine</h1>
+<div class="text-center">
+    <h1>Vaquinha OnLine</h1>
 
+    <hr />
+
+    <p>
+        <a asp-controller="Doacoes" asp-action="Create">Doe agora</a>
+    </p>
+
+
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ValorRestanteMeta)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ValorTotalArrecadado)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.QuantidadeDoadores)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.ValorRestanteMeta)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.ValorTotalArrecadado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.QuantidadeDoadores)
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    @if (Model.Doadores.Any())
+    {
         <hr />
 
-        <p>
-            <a asp-controller="Doacoes" asp-action="Create">Doe agora</a>
-        </p>
+        <p>Quem já doou</p>
 
-
-        <table class="table table-striped table-bordered">
+        <table class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.ValorRestanteMeta)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.ValorTotalArrecadado)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.QuantidadeDoadores)
-                    </th>
+                    <td>Nome</td>
+                    <td>Valor</td>
+                    <td>Mensagem de apoio</td>
+                    <td>Quando?</td>
                 </tr>
             </thead>
-            <tbody>
-
+            @foreach (var item in Model.Doadores)
+            {
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => Model.ValorRestanteMeta)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => Model.ValorTotalArrecadado)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => Model.QuantidadeDoadores)
-                    </td>
+                    <td>@item.Nome</td>
+                    <td>@item.Valor.ToString("C")</td>
+                    <td>@item.MensagemApoio</td>
+                    <td>@item.DescricaoTempo</td>
                 </tr>
-
-            </tbody>
+            }
         </table>
+    }
 
-        <hr />
+    <hr />
 
-        <span>VEJA QUEM JÁ DOOU ( adicionar carousel aqui )</span>
-        @foreach (var item in Model.Doadores)
-        {
-            <p>
-                @Html.DisplayFor(a => item.Nome)
-            </p>
-        }
+    <p>Para onde vai minha doação?</p>
 
-        <p>PARA ONDE VAI MINHA DOAÇÃO ( adicionar carousel aqui )</p>
-
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <td>Instituicao</td>
+                <td>Onde?</td>
+            </tr>
+        </thead>
         @foreach (var item in Model.Instituicoes)
         {
-            <p>
-                @Html.DisplayFor(a => item.Nome)
-            </p>
+            <tr>
+                <td>@item.Nome</td>
+                <td>@item.Cidade - @item.Estado</td>
+            </tr>
         }
+    </table>
 
-    </div>
+</div>
+
+@section scripts{
+
+    <script type="text/javascript">
+
+    </script>
+}

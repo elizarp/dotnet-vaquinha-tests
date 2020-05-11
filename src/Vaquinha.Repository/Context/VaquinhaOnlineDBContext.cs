@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
 using Vaquinha.Domain.Entities;
 using Vaquinha.Repository.Mapping;
 

@@ -4,6 +4,8 @@
     $("#cvv").mask("9999");
     $("#validade").mask("99/9999");
     $("#cardNumber").mask("9999 9999 9999 9999");                         
+    
+    $("#estado").inputmask({ mask: "[AA]" });
 
     $("#valor").inputmask('currency', {
         "autoUnmask": true,

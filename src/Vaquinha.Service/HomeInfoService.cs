@@ -61,10 +61,9 @@ namespace Vaquinha.Service
         }
 
         public async Task<IEnumerable<CausaViewModel>> RecuperarCausasAsync()
-        {
-            //var causasPolen = await _polenService.RecuperarInstituicoesAsync();
-            var instituicoes = await _causaRepository.RecuperarCausas();
-            return _mapper.Map<IEnumerable<Causa>, IEnumerable<CausaViewModel>>(instituicoes);
+        {   
+            var causas = await _causaRepository.RecuperarCausas();
+            return _mapper.Map<IEnumerable<Causa>, IEnumerable<CausaViewModel>>(causas);
         }
 
         private async Task<IEnumerable<DoadorViewModel>> RecuperarDoadoresAsync()

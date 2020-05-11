@@ -29,12 +29,6 @@ namespace Vaquinha.MVC.Controllers
         {
             var homeViewModel = await _homeService.RecuperarDadosIniciaisHomeAsync();
 
-            // mocado para testes de carousel ( remover aapós ajustes )
-            homeViewModel.Doadores = new List<DoadorViewModel> { new DoadorViewModel { Nome = "Doador 1" }, new DoadorViewModel { Nome = "Doador 2" }, new DoadorViewModel { Nome = "Doador 3" } };
-            homeViewModel.Instituicoes = new List<CausaViewModel> { new CausaViewModel { Nome = "Instituicao 1" }, new CausaViewModel { Nome = "Instituicao 1" }, new CausaViewModel { Nome = "Instituicao 3" } };
-
-            // adicionar carousel para instituicoes
-
             return View(homeViewModel);
         }
 

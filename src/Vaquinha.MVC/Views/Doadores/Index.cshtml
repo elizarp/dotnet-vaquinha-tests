@@ -4,9 +4,13 @@
     ViewData["Title"] = "Index";
 }
 
-<h3>Veja quem já doou!</h3>
+<div class="text-center">
+    <h3>Veja quem já doou!</h3>
+    <hr />
+</div>
 
-<table class="table">
+
+<table class="table table-striped table-bordered text-center">
     <thead>
         <tr>
             <th>
@@ -24,22 +28,36 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @{var nome = @item.Anonima ? "Doação Anônima" : @item.Nome;}
-                <span>@nome</span>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MensagemApoio)
-            </td>
-            <td>
-               <span>@item.Valor.ToString("C")</span>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DescricaoTempo)
-            </td>
-        </tr>
-}
+        @if (Model.Any())
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @{var nome = @item.Anonima ? "Doação Anônima" : @item.Nome;}
+                        <span>@nome</span>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MensagemApoio)
+                    </td>
+                    <td>
+                        <span>@item.Valor.ToString("C")</span>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DescricaoTempo)
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="4">
+                    <center> <span class="text-center">Ainda não houveram doações. Seja você o primeiro!</span></center>
+                </td>
+            </tr>
+
+        }
     </tbody>
 </table>
+
