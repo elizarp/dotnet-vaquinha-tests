@@ -12,21 +12,18 @@ namespace Vaquinha.Service
     {
         private readonly IMapper _mapper;
         private readonly IDoacaoService _doacaoService;
-        private readonly IPaymentService _polenService;
         private readonly GloballAppConfig _globalSettings;
         private readonly IHomeInfoRepository _homeRepository;
         private readonly ICausaRepository _causaRepository;
 
         public HomeInfoService(IMapper mapper,
                                IDoacaoService doacaoService,
-                               IPaymentService polenService,
                                GloballAppConfig globalSettings,
                                IHomeInfoRepository homeRepository,
                                ICausaRepository causaRepotirory)
         {
             _mapper = mapper;
             _doacaoService = doacaoService;
-            _polenService = polenService;
             _homeRepository = homeRepository;
             _globalSettings = globalSettings;
             _causaRepository = causaRepotirory;

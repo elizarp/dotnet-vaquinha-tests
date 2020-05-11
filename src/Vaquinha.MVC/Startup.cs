@@ -7,7 +7,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NToastNotify;
 using Vaquinha.Domain;
-using Vaquinha.Payment;
 using Vaquinha.Repository;
 using Vaquinha.Repository.Context;
 using Vaquinha.Service;
@@ -29,7 +28,15 @@ namespace Vaquinha.MVC
             services.AddControllersWithViews().AddNToastNotifyNoty(new NotyOptions
             {
                 ProgressBar = true,
-                Timeout = 5000,
+                Timeout = 5000                
+            }, new NToastNotifyOption
+            {
+                DefaultSuccessTitle = "Yeah!",
+                DefaultSuccessMessage = "Operação realizada com sucesso!",
+
+                DefaultErrorTitle = "Ops!",
+                DefaultErrorMessage = "Algo deu errado!"               
+
             }).AddRazorRuntimeCompilation();
 
             services
@@ -82,7 +89,6 @@ namespace Vaquinha.MVC
         {
             services.AddScoped<ICausaService, CausaService>();
             services.AddScoped<IHomeInfoService, HomeInfoService>();
-            services.AddScoped<IPaymentService, PolenPaymentService>();
 
             services.AddScoped<IDomainNotificationService, DomainNotificationService>();
             services.AddScoped<IDoacaoService, DoacaoService>();
@@ -90,8 +96,6 @@ namespace Vaquinha.MVC
 
             services.AddScoped<ICausaRepository, CausaRepository>();
             services.AddScoped<IHomeInfoRepository, HomeInfoRepository>();
-
-            services.AddScoped<IPolenHttpServiceHelper, PolenHttpServiceHelper>();
 
             return services;
         }
