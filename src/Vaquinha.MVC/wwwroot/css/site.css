@@ -4,12 +4,12 @@ for details on configuring this project to bundle and minify static web assets. 
 a.navbar-brand {
   white-space: normal;
   text-align: center;
-  word-break: break-all;
+  word-break: break-all;;
 }
 
 /* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
+a, .nav-link {
+  color: #ffffff !important;
 }
 
 .btn-primary {
@@ -22,6 +22,16 @@ a {
   color: #fff;
   background-color: #1b6ec2;
   border-color: #1861ac;
+}
+
+.navbar-brand {
+  padding: 0;
+}
+.navbar-nav .nav-link {
+  padding-top: 0;
+  padding-bottom: 0;
+  height: 50px;
+  line-height: 50px;
 }
 
 /* Sticky footer styles
@@ -63,13 +73,28 @@ body {
     margin-bottom: 60px;
     font-family: sans-serif;
     
-    background-image: url('../images/so-white.png');
+    /* background-image: url('../images/so-white.png');*/
+    background-color: #fff5d7;
 }
 .footer {
   position: absolute;
   bottom: 0;
   width: 100%;
   white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+  line-height: 40px; /* Vertically center the text there */
+  background-color: #ff5e6c;
+  color:#ffffff !important;
 }
 
+.bg-pink {
+  background-color: #ff5e6c;
+  color: #ffffff;
+}
+
+.btn-yellow {
+  background-color: #feb300;
+}
+
+.pink-leaf {
+  background-color: #ffaaab;
+}
