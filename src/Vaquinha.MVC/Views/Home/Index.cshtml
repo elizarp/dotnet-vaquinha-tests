@@ -58,48 +58,96 @@
     {
         <hr />
 
-        <p>Quem já doou?<b><code>( ELI - ADICIONAR CAROUSEL AQUI )</code></b></p>
+        <h4>Quem já doou?</h4>
 
-        <table class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <td>Nome</td>
-                    <td>Valor</td>
-                    <td>Mensagem de apoio</td>
-                    <td>Quando?</td>
-                </tr>
-            </thead>
-            @foreach (var item in Model.Doadores)
-            {
-                <tr>
-                    <td>@item.Nome</td>
-                    <td>@item.Valor.ToString("C", CultureInfo.CreateSpecificCulture("pt-BR"))</td>
-                    <td>@item.MensagemApoio</td>
-                    <td>@item.DescricaoTempo</td>
-                </tr>
-            }
-        </table>
+        <div id="carouselDoadores" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner" style="background-color: gray;">
+                @foreach (var item in Model.Doadores)
+                {
+                    var active = "";
+                    @if (item==Model.Doadores.FirstOrDefault()) {active="active";}
+                    <div class="carousel-item @active">
+                        <div class="row">
+                            <div class="col-2"></div>
+                            <div class="col-8">
+                                <div class="card">
+                                    <div class="card-header">
+                                        @item.Nome - @item.Valor.ToString("C", CultureInfo.CreateSpecificCulture("pt-BR"))
+                                    </div>
+                                    <div class="card-body">
+                                        @item.MensagemApoio <br/>
+                                        <i>@item.DescricaoTempo</i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2"></div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <a class="carousel-control-prev" href="#carouselDoadores" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Próximo</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselDoadores" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Anterior</span>
+            </a>
+        </div>
     }
 
     <hr />
 
-    <p>Para onde vai minha doação? <b><code>( ELI - ADICIONAR CAROUSEL AQUI )</code></b></p>
+    <h4>Para onde vai minha doação? </h4>
 
-    <table class="table table-bordered table-striped">        
-        @foreach (var item in Model.Instituicoes)
-        {
-            <tr>
-                <td>@item.Nome</td>
-                <td>@item.Cidade - @item.Estado</td>
-            </tr>
-        }
-    </table>
+    <div id="carouselInstituicoes" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner" style="background-color: gray;">
+            @foreach (var item in Model.Instituicoes)
+            {
+                var active = "";
+                @if (item==Model.Instituicoes.FirstOrDefault()) {active="active";}
+                <div class="carousel-item @active">
+                    <div class="row">
+                        <div class="col"></div>
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-header">
+                                    @item.Nome
+                                </div>
+                                <div class="card-body">
+                                    @item.Cidade - @item.Estado
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col"></div>
+                    </div>
+                </div>
+            }
+        </div>
+        <a class="carousel-control-prev" href="#carouselInstituicoes" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Próximo</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselInstituicoes" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Anterior</span>
+        </a>
+    </div>
+
+
 
 </div>
 
 @section scripts{
 
     <script type="text/javascript">
+        $('#cauroselDoadores').carousel({
+            interval: 3000
+        });
 
+        $('#cauroselInstituicoes').carousel({
+            interval: 2000
+        });
+        
     </script>
 }
