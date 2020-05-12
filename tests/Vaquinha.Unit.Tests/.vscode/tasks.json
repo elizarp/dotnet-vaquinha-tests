@@ -4,7 +4,7 @@
         {
             "label": "build",
             "command": "dotnet",
-            "type": "shell",
+            "type": "process",
             "args": [
                 "build",
                 "${workspaceFolder}/Vaquinha.Unit.Tests.csproj",
@@ -16,7 +16,7 @@
         {
             "label": "publish",
             "command": "dotnet",
-            "type": "shell",
+            "type": "process",
             "args": [
                 "publish",
                 "${workspaceFolder}/Vaquinha.Unit.Tests.csproj",
@@ -28,7 +28,7 @@
         {
             "label": "watch",
             "command": "dotnet",
-            "type": "shell",
+            "type": "process",
             "args": [
                 "watch",
                 "run",
