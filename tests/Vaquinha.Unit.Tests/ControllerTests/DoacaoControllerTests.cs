@@ -16,12 +16,11 @@ using Xunit;
 namespace Vaquinha.Unit.Tests.ControllerTests
 {
     [Collection(nameof(DoacaoFixtureCollection))]
-    public class DoacaoControllerTests: IClassFixture<DoacaoFixture>, 
-                                        IClassFixture<EnderecoFixture>, 
+    public class DoacaoControllerTests : IClassFixture<DoacaoFixture>,
+                                        IClassFixture<EnderecoFixture>,
                                         IClassFixture<CartaoCreditoFixture>
     {
-        private readonly Mock<IDoacaoRepository> _doacaoRepository = new Mock<IDoacaoRepository>();
-        private readonly Mock<IMemoryCache> _memoryCache = new Mock<IMemoryCache>();
+        private readonly Mock<IDoacaoRepository> _doacaoRepository = new Mock<IDoacaoRepository>();        
         private readonly Mock<GloballAppConfig> _globallAppConfig = new Mock<GloballAppConfig>();
 
         private readonly DoacaoFixture _doacaoFixture;
@@ -58,12 +57,7 @@ namespace Vaquinha.Unit.Tests.ControllerTests
             _doacaoModelValida.EnderecoCobranca = enderecoFixture.EnderecoModelValido();
             _doacaoModelValida.FormaPagamento = cartaoCreditoFixture.CartaoCreditoModelValido();
 
-            //_polenUserDonationValida = _polenUserDonationFixture.PolenUserDonationValida();
-            //_doacaoDetalheTransacaoValida = _doacaoDetalheTransacaoFixture.DoacaoDetalheTransacaoValida();
-
             _mapper.Setup(a => a.Map<DoacaoViewModel, Doacao>(_doacaoModelValida)).Returns(_doacaoValida);
-            //_mapper.Setup(a => a.Map<Doacao, PolenUserDonation>(_doacaoValida)).Returns(_polenUserDonationValida);
-            //_polenService.Setup(_ => _.AdicionadDoacaoAsync(_polenUserDonationValida)).ReturnsAsync(_doacaoDetalheTransacaoValida);
 
             _doacaoService = new DoacaoService(_mapper.Object, _doacaoRepository.Object, _domainNotificationService);
         }
@@ -117,36 +111,6 @@ namespace Vaquinha.Unit.Tests.ControllerTests
             ((DoacaoViewModel)viewResult.Model).Should().Be(doacaoModelInvalida);
         }
 
-        /*
-
-		[Trait("DoacaoController", "DoacaoController_AdicionarDoacaoException_InternalServerError")]
-		[Fact]
-		public void DoacaoController_AdicionarDoacaoException_InternalServerError()
-		{
-			// Arrange
-			_doacaoRepository.Setup(a => a.AdicionarAsync(_doacaoValida)).Throws(new Exception("ERRO AO ACESSAO O BANCO DE DADOS"));
-
-			_doacaoController = new DoacoesController(_doacaoService, _domainNotificationService, _toastNotification.Object);
-
-			// Act
-			var retorno = _doacaoController.Create(_doacaoModelValida);
-
-			// Assert
-			//retorno.StatusCodeShouldBe(HttpStatusCode.InternalServerError);
-			Assert.IsType<ObjectResult>(retorno);
-			var objectResponse = retorno as ObjectResult;
-
-			_doacaoRepository.Verify(a => a.AdicionarAsync(_doacaoValida), Times.Once);
-			_mapper.Verify(a => a.Map<DoacaoViewModel, Doacao>(_doacaoModelValida), Times.Once);
-
-			//var response = retorno.Content();
-
-			response.Data.Should().BeNull();
-			response.Errors.Should().NotBeNull();
-			(response.Errors as string[]).Should().HaveCount(1, "porque foi lançada uma exeção na camada de acesso a dados");
-			(response.Errors as string[]).Should().Contain("ERRO AO ACESSAO O BANCO DE DADOS", because: "é a mensagem de erro configurado na exceção");
-		}
-*/
         #endregion
     }
 }
