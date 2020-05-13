@@ -8,7 +8,7 @@ using Vaquinha.Tests.Common.Fixtures;
 namespace Vaquinha.Unit.Tests.DomainTests
 {
     [Collection(nameof(CartaoCreditoFixtureCollection))]
-    public class CartaoCreditoTests
+    public class CartaoCreditoTests: IClassFixture<CartaoCreditoFixture>
     {
         private readonly CartaoCreditoFixture _fixture;
 

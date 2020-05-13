@@ -5,7 +5,9 @@ using Vaquinha.Tests.Common.Fixtures;
 namespace Vaquinha.Unit.Tests.DomainTests
 {
     [Collection(nameof(DoacaoFixtureCollection))]    
-    public class DoacaoTests
+    public class DoacaoTests: IClassFixture<DoacaoFixture>, 
+                              IClassFixture<EnderecoFixture>, 
+                              IClassFixture<CartaoCreditoFixture>
     {
         private readonly DoacaoFixture _doacaoFixture;
         private readonly EnderecoFixture _enderecoFixture;

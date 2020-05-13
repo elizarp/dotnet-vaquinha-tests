@@ -7,7 +7,7 @@ using Vaquinha.Tests.Common.Fixtures;
 namespace Vaquinha.Unit.Tests.DomainTests
 {
     [Collection(nameof(EnderecoFixtureCollection))]
-    public class EnderecoTests
+    public class EnderecoTests: IClassFixture<EnderecoFixture>
     {
         private readonly EnderecoFixture _fixture;
 

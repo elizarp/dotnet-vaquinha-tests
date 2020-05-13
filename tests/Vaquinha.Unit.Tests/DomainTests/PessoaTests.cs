@@ -5,7 +5,7 @@ using Vaquinha.Tests.Common.Fixtures;
 namespace Vaquinha.Unit.Tests.DomainTests
 {
     [Collection(nameof(PessoaFixtureCollection))]
-    public class PessoaTests
+    public class PessoaTests : IClassFixture<PessoaFixture>
     {
         private readonly PessoaFixture _fixture;
 

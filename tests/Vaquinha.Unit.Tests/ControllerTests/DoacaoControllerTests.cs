@@ -16,7 +16,9 @@ using Xunit;
 namespace Vaquinha.Unit.Tests.ControllerTests
 {
     [Collection(nameof(DoacaoFixtureCollection))]
-    public class DoacaoControllerTests
+    public class DoacaoControllerTests: IClassFixture<DoacaoFixture>, 
+                                        IClassFixture<EnderecoFixture>, 
+                                        IClassFixture<CartaoCreditoFixture>
     {
         private readonly Mock<IDoacaoRepository> _doacaoRepository = new Mock<IDoacaoRepository>();
         private readonly Mock<IMemoryCache> _memoryCache = new Mock<IMemoryCache>();

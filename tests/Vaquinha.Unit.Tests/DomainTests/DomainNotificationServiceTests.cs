@@ -8,7 +8,7 @@ using Vaquinha.Tests.Common.Fixtures;
 namespace Vaquinha.Unit.Tests.DomainTests
 {
     [Collection(nameof(PessoaFixtureCollection))]
-    public class DomainNotificationServiceTests
+    public class DomainNotificationServiceTests: IClassFixture<PessoaFixture>
     {
         private readonly PessoaFixture _pessoaFixture;
         private readonly IDomainNotificationService _domainNotificationService;
