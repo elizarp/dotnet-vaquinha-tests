@@ -1,25 +1,24 @@
-using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NToastNotify;
-using Vaquinha.Domain;
 using Vaquinha.MVC.Extensions;
-using Vaquinha.Repository;
-using Vaquinha.Repository.Context;
-using Vaquinha.Service;
-using Vaquinha.Service.AutoMapper;
 
 namespace Vaquinha.MVC
 {
     public class StartupWebTests
     {
-        public StartupWebTests(IConfiguration configuration)
+        public StartupWebTests(IWebHostEnvironment env)
         {
-            Configuration = configuration;
+            var builder = new ConfigurationBuilder()
+                     .SetBasePath(env.ContentRootPath)
+                     .AddJsonFile("appsettings.json")
+                     .AddJsonFile($"appsettings.{env.EnvironmentName}.json")
+                     .AddEnvironmentVariables();
+
+            Configuration = builder.Build();
         }
 
         public IConfiguration Configuration { get; }
@@ -29,14 +28,14 @@ namespace Vaquinha.MVC
             services.AddControllersWithViews().AddNToastNotifyNoty(new NotyOptions
             {
                 ProgressBar = true,
-                Timeout = 5000                
+                Timeout = 5000
             }, new NToastNotifyOption
             {
                 DefaultSuccessTitle = "Yeah!",
                 DefaultSuccessMessage = "Operação realizada com sucesso!",
 
                 DefaultErrorTitle = "Ops!",
-                DefaultErrorMessage = "Algo deu errado!"               
+                DefaultErrorMessage = "Algo deu errado!"
 
             }).AddRazorRuntimeCompilation();
 
@@ -45,7 +44,6 @@ namespace Vaquinha.MVC
                 .AddIocConfiguration(Configuration)
                 .AddAutoMapper(Configuration)
                 .AddCustomConfiguration(Configuration);
-
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -73,7 +71,7 @@ namespace Vaquinha.MVC
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            app.UseNToastNotify();
+            app.UseNToastNotify();            
         }
     }
 }

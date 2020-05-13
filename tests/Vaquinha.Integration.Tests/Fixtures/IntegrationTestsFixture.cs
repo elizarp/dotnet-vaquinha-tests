@@ -56,6 +56,7 @@ namespace Vaquinha.Integration.Tests.Fixtures
             return new ConfigurationBuilder()
                       .SetBasePath(workingDir)
                       .AddJsonFile("appsettings.json")
+                      .AddJsonFile("appsettings.Testing.json")
                       .Build();
         }
     }
