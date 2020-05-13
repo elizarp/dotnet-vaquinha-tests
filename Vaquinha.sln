@@ -27,7 +27,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vaquinha.Unit.Tests", "test
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vaquinha.Integration.Tests", "tests\Vaquinha.Integration.Tests\Vaquinha.Integration.Tests.csproj", "{DC5EE830-F8C2-480E-AB24-02D55D05B0D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vaquinha.Common.Tests", "tests\Vaquinha.Common.Tests\Vaquinha.Common.Tests.csproj", "{69F7D243-7685-4435-B171-382E1662C289}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vaquinha.Tests.Common", "tests\Vaquinha.Tests.Common\Vaquinha.Tests.Common.csproj", "{69F7D243-7685-4435-B171-382E1662C289}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
