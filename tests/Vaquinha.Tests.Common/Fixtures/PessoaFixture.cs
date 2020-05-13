@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using Xunit;
 using Vaquinha.Domain.Entities;
 
-namespace Vaquinha.Tests.Fixtures
+namespace Vaquinha.Tests.Common.Fixtures
 {
     [CollectionDefinition(nameof(PessoaFixtureCollection))]
     public class PessoaFixtureCollection : ICollectionFixture<PessoaFixture>

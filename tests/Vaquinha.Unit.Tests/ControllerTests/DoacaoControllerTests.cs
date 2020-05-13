@@ -10,10 +10,10 @@ using Vaquinha.Domain.Entities;
 using Vaquinha.Domain.ViewModels;
 using Vaquinha.MVC.Controllers;
 using Vaquinha.Service;
-using Vaquinha.Tests.Fixtures;
+using Vaquinha.Tests.Common.Fixtures;
 using Xunit;
 
-namespace Vaquinha.Tests.ControllerTests
+namespace Vaquinha.Unit.Tests.ControllerTests
 {
     [Collection(nameof(DoacaoFixtureCollection))]
     public class DoacaoControllerTests

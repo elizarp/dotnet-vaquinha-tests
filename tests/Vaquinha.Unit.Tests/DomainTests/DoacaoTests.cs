@@ -1,8 +1,8 @@
 ﻿using FluentAssertions;
 using Xunit;
-using Vaquinha.Tests.Fixtures;
+using Vaquinha.Tests.Common.Fixtures;
 
-namespace Vaquinha.Tests.DomainTests
+namespace Vaquinha.Unit.Tests.DomainTests
 {
     [Collection(nameof(DoacaoFixtureCollection))]    
     public class DoacaoTests

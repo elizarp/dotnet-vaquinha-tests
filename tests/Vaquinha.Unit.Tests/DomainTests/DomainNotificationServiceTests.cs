@@ -3,9 +3,9 @@ using Xunit;
 using Vaquinha.Domain;
 using Vaquinha.Domain.Entities;
 using System.Linq;
-using Vaquinha.Tests.Fixtures;
+using Vaquinha.Tests.Common.Fixtures;
 
-namespace Vaquinha.Tests.DomainTests
+namespace Vaquinha.Unit.Tests.DomainTests
 {
     [Collection(nameof(PessoaFixtureCollection))]
     public class DomainNotificationServiceTests

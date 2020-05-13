@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
-using Vaquinha.Tests.Fixtures;
+using Vaquinha.Tests.Common.Fixtures;
 
-namespace Vaquinha.Tests.DomainTests
+namespace Vaquinha.Unit.Tests.DomainTests
 {
     [Collection(nameof(CartaoCreditoFixtureCollection))]
     public class CartaoCreditoTests

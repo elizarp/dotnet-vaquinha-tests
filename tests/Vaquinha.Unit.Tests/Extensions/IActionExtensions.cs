@@ -4,7 +4,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Vaquinha.MVC;
 
-namespace Vaquinha.Tests.Extensions
+namespace Vaquinha.Unit.Tests.Extensions
 {
     public static class IActionExtensions
     {

@@ -3,9 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
-using Vaquinha.Tests.Fixtures;
-
-namespace Vaquinha.Tests.DomainTests
+using Vaquinha.Tests.Common.Fixtures;
+namespace Vaquinha.Unit.Tests.DomainTests
 {
     [Collection(nameof(EnderecoFixtureCollection))]
     public class EnderecoTests

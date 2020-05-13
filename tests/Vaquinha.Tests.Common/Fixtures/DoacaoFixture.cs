@@ -5,7 +5,7 @@ using Xunit;
 using Vaquinha.Domain.Entities;
 using Vaquinha.Domain.ViewModels;
 
-namespace Vaquinha.Tests.Fixtures
+namespace Vaquinha.Tests.Common.Fixtures
 {
     [CollectionDefinition(nameof(DoacaoFixtureCollection))]
     public class DoacaoFixtureCollection : ICollectionFixture<DoacaoFixture>, ICollectionFixture<EnderecoFixture>, ICollectionFixture<CartaoCreditoFixture>

@@ -3,38 +3,34 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using System;
 using Xunit;
+using FluentAssertions;
 
 namespace Vaquinha.AutomatedUITests
 {
-	// Class com herança do IDisposable para chamar Dispose() e fechar o browser quando terminar tudo.
+	// IDisposable para chamar Dispose() e fechar o browser no término do teste.
 	public class UnitTestFact : IDisposable
 	{
-		// Cria DriverFactory
 		private DriverFactory _driverFactory = new DriverFactory();
 		private IWebDriver _driver;
 
-		// Fecha browser.
 		public void Dispose()
 		{
 			_driverFactory.Close();
 		}
 
-		// Test Escrito com Fact
 		[Fact]
 		public void TestFact()
 		{
-			// abre url no driver factory
-			_driverFactory.NavigateToUrl("http://localhost:5000/");
-			// obtem driver do factory.
+			// Arrange
+			_driverFactory.NavigateToUrl("https://vaquinha.azurewebsites.net/");
 			_driver = _driverFactory.GetWebDriver();
 
-			// IWebElement é utilizado para armazenar os elementos identificados das páginas.
+			// Act
 			IWebElement webElement = null;
-			// Procura no html da pagina um elemento com ID "hplogo" (Logo do Goole)
-			webElement = _driver.FindElement(By.ClassName("container"));
+			webElement = _driver.FindElement(By.ClassName("vaquinha-logo"));
 
-			// Verifica se o elemento foi encontrado e se está exibido.
-			Assert.True(webElement.Displayed);
+			// Assert
+			webElement.Displayed.Should().BeTrue(because:"logo exibido");
 		}
 	}
 }
