@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Vaquinha.Domain;
 using Vaquinha.Domain.Entities;
@@ -32,8 +31,7 @@ namespace Vaquinha.Repository
 
         public async Task<IEnumerable<Doacao>> RecuperarDoadoesAsync(int pageIndex = 0)
         {
-            return await _vaquinhaOnlineDBContext.Doacoes.Include("DadosPessoais")
-                                                 .Skip(pageIndex).Take(_globalSettings.QuantidadeRegistrosPaginacao).ToListAsync();
+            return await _vaquinhaOnlineDBContext.Doacoes.Include("DadosPessoais").ToListAsync();
         }
     }
 }
