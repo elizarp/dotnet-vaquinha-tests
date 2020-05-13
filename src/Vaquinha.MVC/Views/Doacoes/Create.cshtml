@@ -1,0 +1,143 @@
+﻿@model Vaquinha.Domain.ViewModels.DoacaoViewModel
+
+@{
+    ViewData["Title"] = "Doar agora";
+}
+
+
+<form asp-action="Create" asp-controller="Doacoes" method="post">
+
+    <div class="text-center">
+        <h2>Doe agora</h2>
+
+        <hr />
+        <center>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label asp-for="Valor" class="control-label"></label>
+                    <input asp-for="Valor" id="valor" placeholder="Valor doação" class="form-control" />
+                </div>
+            </div>
+            <hr />
+        </center>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+
+            <fieldset>
+                <legend>Dados Pessoais</legend>
+
+                <div class="form-group">
+                    <input asp-for="DadosPessoais.Nome" placeholder="Nome Completo" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <input asp-for="DadosPessoais.Email" placeholder="Email" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <textarea asp-for="DadosPessoais.MensagemApoio" class="form-control" rows="3" maxlength="200"
+                              placeholder="Deixa aqui uma mensagem de apoio" data-val="true"></textarea>
+                </div>
+
+                <div class="form-group float-right">
+                    <label asp-for="DadosPessoais.Anonima" class="control-label"></label>
+                    <input asp-for="DadosPessoais.Anonima" />
+                </div>
+
+            </fieldset>
+        </div>
+        <div class="col-md-5">
+
+            <fieldset>
+                <legend>Endereço de Cobrança</legend>
+
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="form-group">
+                            <input asp-for="EnderecoCobranca.TextoEndereco" maxlength="100" placeholder="Endereço" class="form-control small" />
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <input asp-for="EnderecoCobranca.Numero" placeholder="Número" class="form-control small" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <input asp-for="EnderecoCobranca.Cidade" placeholder="Cidade" class="form-control small" />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input asp-for="EnderecoCobranca.Estado" placeholder="Estado" id="estado" class="form-control small" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <input asp-for="EnderecoCobranca.CEP" id="cep" placeholder="CEP" class="form-control small" />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input asp-for="EnderecoCobranca.Complemento" placeholder="Complemento" class="form-control small" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input asp-for="EnderecoCobranca.Telefone" id="telefone" placeholder="Telefone" class="form-control small" />
+                </div>
+
+            </fieldset>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-3 text-center"></div>
+        <div class="col-md-6 text-center">
+
+            <fieldset>
+                <legend>Dados para pagamento</legend>
+                <div class="form-group">
+                    <input asp-for="FormaPagamento.NomeTitular" placeholder="Nome do Titular" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <input asp-for="FormaPagamento.NumeroCartaoCredito" id="cardNumber" placeholder="Numero do Cartão" class="form-control" />
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input asp-for="FormaPagamento.Validade" id="validade" placeholder="Data de validade" class="form-control small" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input asp-for="FormaPagamento.CVV" id="cvv" placeholder="CVV" class="form-control small" />
+                        </div>
+                    </div>
+                </div>
+
+            </fieldset>
+
+        </div>
+        <div class="col-md-3 text-center"></div>
+    </div>
+
+
+    <div class="text-center">
+        <div class="form-group">
+            <input type="submit" value="Doar" class="btn btn-yellow" />
+        </div>
+    </div>
+
+</form>

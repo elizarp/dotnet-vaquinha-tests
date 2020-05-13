@@ -1,0 +1,5 @@
+{
+	"appService.preDeployTask": "publish-release",
+	"appService.deploySubpath": "",
+	"appService.defaultWebAppToDeploy": "/subscriptions/7f951f52-5c31-4bb1-9c43-dec4fdf2a45b/resourceGroups/EliezerFree/providers/Microsoft.Web/sites/vaquinha"
+}

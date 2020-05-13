@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Vaquinha.Domain.ViewModels.DoadorViewModel>
+@using System.Globalization
+ 
+@{
+    ViewData["Title"] = "Doadores";
+}
+
+<div class="text-center">
+    <h3>Veja quem já doou!</h3>
+    <hr />
+</div>
+
+
+<table class="table table-striped table-bordered text-center">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MensagemApoio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Valor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DescricaoTempo)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Any())
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MensagemApoio)
+                    </td>
+                    <td>
+                        <span>@item.Valor.ToString("C", CultureInfo.CreateSpecificCulture("pt-BR"))</span>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DescricaoTempo)
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="4">
+                    <center> <span class="text-center">Ainda não houveram doações. Seja você o primeiro!</span></center>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

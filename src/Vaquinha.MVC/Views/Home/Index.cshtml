@@ -1,0 +1,153 @@
+﻿@model Vaquinha.Domain.ViewModels.HomeViewModel
+@using System.Globalization 
+
+@{
+    ViewData["Title"] = "Vaquinha online";
+}
+
+<div class="text-center">
+    <h3>Vaquinha online</h3>
+
+    <hr />
+
+    <p>        
+        <a asp-controller="Doacoes" asp-action="Create" class="btn btn-yellow">
+            <span></span>Doar agora
+        </a>
+    </p>
+
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ValorTotalArrecadado)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ValorRestanteMeta)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.QuantidadeDoadores)
+                </th>
+                <th>
+                    <span>Tempo Restante</span>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+                <td>
+                    @Model.ValorTotalArrecadado.ToString("C", CultureInfo.CreateSpecificCulture("pt-BR"))
+                </td>
+                <td>
+                    @Model.ValorRestanteMeta.ToString("C", CultureInfo.CreateSpecificCulture("pt-BR"))
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.QuantidadeDoadores)
+                </td>
+                <td>
+                    <code>  @Model.TempoRestanteDias dias - @Model.TempoRestanteHoras horas - @Model.TempoRestanteMinutos minutos</code>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    @if (Model.Doadores.Any())
+    {
+        <hr />
+
+        <h4>Quem já doou?</h4>
+
+        <div id="carouselDoadores" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner" style="background-color: gray;">
+                @foreach (var item in Model.Doadores)
+                {
+                    var active = "";
+                    @if (item==Model.Doadores.FirstOrDefault()) {active="active";}
+                    <div class="carousel-item @active">
+                        <div class="row">
+                            <div class="col-2"></div>
+                            <div class="col-8">
+                                <div class="card">
+                                    <div class="card-header">
+                                        @item.Nome - @item.Valor.ToString("C", CultureInfo.CreateSpecificCulture("pt-BR"))
+                                    </div>
+                                    <div class="card-body">
+                                        @item.MensagemApoio <br/>
+                                        <i>@item.DescricaoTempo</i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2"></div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <a class="carousel-control-prev" href="#carouselDoadores" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Próximo</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselDoadores" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Anterior</span>
+            </a>
+        </div>
+    }
+
+    <hr />
+
+    <h4>Para onde vai minha doação? </h4>
+
+    <div id="carouselInstituicoes" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner" style="background-color: gray;">
+            @foreach (var item in Model.Instituicoes)
+            {
+                var active = "";
+                @if (item==Model.Instituicoes.FirstOrDefault()) {active="active";}
+                <div class="carousel-item @active">
+                    <div class="row">
+                        <div class="col"></div>
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-header">
+                                    @item.Nome
+                                </div>
+                                <div class="card-body">
+                                    @item.Cidade - @item.Estado
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col"></div>
+                    </div>
+                </div>
+            }
+        </div>
+        <a class="carousel-control-prev" href="#carouselInstituicoes" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Próximo</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselInstituicoes" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Anterior</span>
+        </a>
+    </div>
+
+
+
+</div>
+
+@section scripts{
+
+    <script type="text/javascript">
+        $('#cauroselDoadores').carousel({
+            interval: 3000
+        });
+
+        $('#cauroselInstituicoes').carousel({
+            interval: 2000
+        });
+        
+    </script>
+}
