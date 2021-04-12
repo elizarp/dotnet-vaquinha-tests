@@ -41,27 +41,27 @@ namespace Vaquinha.Domain.Entities
 
     public class PessoaValidacao : AbstractValidator<Pessoa>
     {
-        private const int MAX_LENTH_CAMPOS = 150;
-        private const int MAX_LENTH_MENSAGEM = 500;
+        private const int MAX_LENGTH_CAMPOS = 150;
+        private const int MAX_LENGTH_MENSAGEM = 500;
 
         public PessoaValidacao()
         {
             RuleFor(a => a.Nome)
                 .NotEmpty().WithMessage("O campo Nome é obrigatório.")
                 .When(a => a.Anonima == false)
-                .MaximumLength(MAX_LENTH_CAMPOS).WithMessage("O campo Nome deve possuir no máximo 150 caracteres.");
+                .MaximumLength(MAX_LENGTH_CAMPOS).WithMessage("O campo Nome deve possuir no máximo 150 caracteres.");
 
             RuleFor(a => a.Email)
                 .NotEmpty().WithMessage("O campo Email é obrigatório.")
-                .MaximumLength(MAX_LENTH_CAMPOS).WithMessage($"O campo Email deve possuir no máximo {MAX_LENTH_CAMPOS} caracteres.");
+                .MaximumLength(MAX_LENGTH_CAMPOS).WithMessage($"O campo Email deve possuir no máximo {MAX_LENGTH_CAMPOS} caracteres.");
 
             RuleFor(a => a.Email).EmailAddress()
                 .When(a => !string.IsNullOrEmpty(a.Email))
-                .When(a => a?.Email?.Length <= MAX_LENTH_CAMPOS)
+                .When(a => a?.Email?.Length <= MAX_LENGTH_CAMPOS)
                 .WithMessage("O campo Email é inválido.");
 
             RuleFor(a => a.MensagemApoio)                
-                .MaximumLength(MAX_LENTH_MENSAGEM).WithMessage($"O campo Mensagem de Apoio deve possuir no máximo {MAX_LENTH_MENSAGEM} caracteres.");
+                .MaximumLength(MAX_LENGTH_MENSAGEM).WithMessage($"O campo Mensagem de Apoio deve possuir no máximo {MAX_LENGTH_MENSAGEM} caracteres.");
         }
     }
 }

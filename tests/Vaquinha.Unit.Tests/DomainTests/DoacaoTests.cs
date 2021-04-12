@@ -109,8 +109,8 @@ namespace Vaquinha.Unit.Tests.DomainTests
         public void Doacao_MensagemApoioMaxlenghtExecido_DoacaoInvalida()
         {
             // Arrange
-            const bool EXCEDER_MAX_LENTH_MENSAGEM_APOIO = true;
-            var doacao = _doacaoFixture.DoacaoValida(false, null, EXCEDER_MAX_LENTH_MENSAGEM_APOIO);
+            const bool EXCEDER_MAX_LENGTH_MENSAGEM_APOIO = true;
+            var doacao = _doacaoFixture.DoacaoValida(false, null, EXCEDER_MAX_LENGTH_MENSAGEM_APOIO);
             doacao.AdicionarEnderecoCobranca(_enderecoFixture.EnderecoValido());
             doacao.AdicionarFormaPagamento(_cartaoCreditoFixture.CartaoCreditoValido());
 

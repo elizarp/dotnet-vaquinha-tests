@@ -31,13 +31,13 @@ namespace Vaquinha.Domain.Entities
 
     public class CartaoCreditoValidacao : AbstractValidator<CartaoCredito>
     {
-        private const int MAX_LENTH_CAMPOS = 150;
+        private const int MAX_LENGTH_CAMPOS = 150;
 
         public CartaoCreditoValidacao()
         {
             RuleFor(o => o.NomeTitular)
               .NotEmpty().WithMessage("O campo Nome Titular deve ser preenchido")
-              .MaximumLength(MAX_LENTH_CAMPOS).WithMessage($"O campo Nome Titular deve possuir no máximo {MAX_LENTH_CAMPOS} caracteres");
+              .MaximumLength(MAX_LENGTH_CAMPOS).WithMessage($"O campo Nome Titular deve possuir no máximo {MAX_LENGTH_CAMPOS} caracteres");
 
             RuleFor(o => o.NumeroCartaoCredito)
                 .NotEmpty().WithMessage("O campo Número de cartão de crédito deve ser preenchido")
