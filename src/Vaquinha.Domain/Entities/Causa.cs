@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using System;
-using System.Linq;
 
 using Vaquinha.Domain.Base;
 
@@ -25,7 +24,8 @@ namespace Vaquinha.Domain.Entities
 
 		public override bool Valido()
 		{
-			ValidationResult = new CausaValidacao().Validate(this);
+			ValidationResult = new CausaValidacao().Validate(instance: this);
+
 			return ValidationResult.IsValid;
 		}
 	}
@@ -33,30 +33,32 @@ namespace Vaquinha.Domain.Entities
 	public class CausaValidacao : AbstractValidator<Causa>
 	{
 		#region Atributos
-		public static int MaxLengthCampos { get; set; } = 150;
+		public static int MaxLengthCampos { get; private set; } = 150;
 		#endregion
 
 		#region Construtores
 		public CausaValidacao()
 		{
-			RuleSet(
-					ruleSetName: "Campo obrigatório",
-					action: () =>
-				   {
-					   RuleFor(c => c.Id).NotNull();
-					   RuleFor(c => c.Nome).NotNull();
-					   RuleFor(c => c.Cidade).NotNull();
-					   RuleFor(c => c.Estado).NotNull();
-				   });
 
-			RuleSet(
-					ruleSetName: "Quantidade caracteres",
-					action: () =>
-					{
-						RuleFor(c => c.Nome).MaximumLength(MaxLengthCampos);
-						RuleFor(c => c.Cidade).MaximumLength(MaxLengthCampos);
-						RuleFor(c => c.Estado).MaximumLength(MaxLengthCampos);
-					});
+			RuleFor(c => c.Id)
+				.NotNull()
+				.NotEmpty();
+
+			RuleFor(c => c.Nome)
+				.NotNull()
+				.NotEmpty();
+
+			RuleFor(c => c.Cidade)
+				.NotNull()
+				.NotEmpty();
+
+			RuleFor(c => c.Estado)
+				.NotNull()
+				.NotEmpty();
+
+			RuleFor(c => c.Nome).MaximumLength(MaxLengthCampos);
+			RuleFor(c => c.Cidade).MaximumLength(MaxLengthCampos);
+			RuleFor(c => c.Estado).MaximumLength(MaxLengthCampos);
 		}
 		#endregion
 	}
