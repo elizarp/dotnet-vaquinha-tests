@@ -4,34 +4,39 @@ using Vaquinha.Domain;
 
 namespace Vaquinha.MVC.Controllers
 {
-    public class BaseController : Controller
-    {
-        private readonly IToastNotification _toastNotification;
-        private readonly IDomainNotificationService _domainNotificationService;
+	public class BaseController : Controller
+	{
+		private readonly IToastNotification _toastNotification;
+		private readonly IDomainNotificationService _domainNotificationService;
 
-        public BaseController(IDomainNotificationService domainNotificationService,
-                              IToastNotification toastNotification)
-        {
-            _domainNotificationService = domainNotificationService;
-            _toastNotification = toastNotification;
-        }
+		public BaseController(IDomainNotificationService domainNotificationService,
+							  IToastNotification toastNotification)
+		{
+			_domainNotificationService = domainNotificationService;
+			_toastNotification = toastNotification;
+		}
 
-        protected void AdicionarNotificacaoOperacaoRealizadaComSucesso(string mensagemSucesso = null)
-        {
-            var sucessMessage = mensagemSucesso ?? "Operação realizada com sucesso!";
-            _toastNotification.AddSuccessToastMessage(sucessMessage);
-        }
+		protected void AdicionarNotificacaoOperacaoRealizadaComSucesso(string mensagemSucesso = null)
+		{
+			var sucessMessage = mensagemSucesso ?? "Operação realizada com sucesso!";
+			_toastNotification.AddSuccessToastMessage(sucessMessage);
+		}
 
-        protected void AdicionarErrosDominio()
-        {
-            var errorMessage = _domainNotificationService.PossuiErros
-                ? _domainNotificationService.RecuperarErrosDominioFormatadoHtml()
-                : null;
+		protected void AdicionarErrosDominio()
+		{
+			var errorMessage = _domainNotificationService.PossuiErros
+				? _domainNotificationService.RecuperarErrosDominioFormatadoHtml()
+				: null;
 
-            if (!string.IsNullOrEmpty(errorMessage))
-            {
-                _toastNotification.AddErrorToastMessage(errorMessage);
-            }
-        }
-    }
+			if (!string.IsNullOrEmpty(errorMessage))
+			{
+				_toastNotification.AddErrorToastMessage(errorMessage);
+			}
+		}
+
+		protected internal virtual bool PossuiErrosDominio()
+		{
+			return _domainNotificationService.PossuiErros;
+		}
+	}
 }
