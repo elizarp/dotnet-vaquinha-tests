@@ -6,7 +6,7 @@ namespace Vaquinha.Domain
 {
     public interface ICausaRepository
     {
-        Task<Causa> Adicionar(Causa causa);
+        Task<Causa> AdicionarAsync(Causa causa);
         Task<IEnumerable<Causa>> RecuperarCausas();
     }
 }

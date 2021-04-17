@@ -16,7 +16,7 @@ namespace Vaquinha.Repository
             _dbContext = dbContext;
         }
 
-        public async Task<Causa> Adicionar(Causa causa)
+        public async Task<Causa> AdicionarAsync(Causa causa)
         {
             await _dbContext.AddAsync(causa);
             await _dbContext.SaveChangesAsync();

@@ -6,7 +6,7 @@ namespace Vaquinha.Domain
 {
     public interface ICausaService
     {
-        Task Adicionar(CausaViewModel model);
+        Task AdicionarAsync(CausaViewModel model);
         Task<IEnumerable<CausaViewModel>> RecuperarCausas();
     }
 }
