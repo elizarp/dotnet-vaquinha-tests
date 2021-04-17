@@ -39,22 +39,25 @@ namespace Vaquinha.Domain.Entities
 		#region Construtores
 		public CausaValidacao()
 		{
-
 			RuleFor(c => c.Id)
-				.NotNull()
-				.NotEmpty();
+				.Cascade(cascadeMode: CascadeMode.StopOnFirstFailure)
+				.NotNull().WithMessage("{PropertyName} não pode ser nulo.")
+				.NotEmpty().WithMessage("{PropertyName} não pode ser vazio.");
 
 			RuleFor(c => c.Nome)
-				.NotNull()
-				.NotEmpty();
+				.Cascade(cascadeMode: CascadeMode.StopOnFirstFailure)
+				.NotNull().WithMessage("{PropertyName} não pode ser nulo.")
+				.NotEmpty().WithMessage("{PropertyName} não pode ser vazio.");
 
 			RuleFor(c => c.Cidade)
-				.NotNull()
-				.NotEmpty();
+				.Cascade(cascadeMode: CascadeMode.StopOnFirstFailure)
+				.NotNull().WithMessage("{PropertyName} não pode ser nulo.")
+				.NotEmpty().WithMessage("{PropertyName} não pode ser vazio.");
 
 			RuleFor(c => c.Estado)
-				.NotNull()
-				.NotEmpty();
+				.Cascade(cascadeMode: CascadeMode.StopOnFirstFailure)
+				.NotNull().WithMessage("{PropertyName} não pode ser nulo.")
+				.NotEmpty().WithMessage("{PropertyName} não pode ser vazio.");
 
 			RuleFor(c => c.Nome).MaximumLength(MaxLengthCampos);
 			RuleFor(c => c.Cidade).MaximumLength(MaxLengthCampos);
