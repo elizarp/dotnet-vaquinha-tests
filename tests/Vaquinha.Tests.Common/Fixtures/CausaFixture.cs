@@ -1,7 +1,11 @@
-﻿using Bogus;
+﻿using AutoMapper;
+using Bogus;
 using System;
+using System.Collections.Generic;
 using Vaquinha.Domain.Entities;
+using Vaquinha.Domain.ViewModels;
 using Xunit;
+using System.Linq;
 
 namespace Vaquinha.Tests.Common.Fixtures
 {
@@ -16,7 +20,7 @@ namespace Vaquinha.Tests.Common.Fixtures
 		#endregion
 
 		#region Métodos
-		public Causa CausaValida()
+		public IEnumerable<Causa> CausaValida(int quantidadeEntidades = 1)
 		{
 			var faker = new Faker<Causa>(_localidade);
 
@@ -26,10 +30,10 @@ namespace Vaquinha.Tests.Common.Fixtures
 				.RuleFor(c => c.Cidade, f => f.Address.City())
 				.RuleFor(c => c.Estado, f => f.Address.StateAbbr());
 
-			return faker.Generate();
+			return faker.Generate(quantidadeEntidades);
 		}
 
-		public Causa CausaVaziaInvalida()
+		public IEnumerable<Causa> CausaVaziaInvalida(int quantidadeEntidades = 1)
 		{
 			var faker = new Faker<Causa>(_localidade);
 
@@ -39,19 +43,19 @@ namespace Vaquinha.Tests.Common.Fixtures
 				.RuleFor(c => c.Cidade, f => string.Empty)
 				.RuleFor(c => c.Estado, f => string.Empty);
 
-			return faker.Generate();
+			return faker.Generate(quantidadeEntidades);
 		}
 
-		public Causa CausaCamposNulosInvalida()
+		public IEnumerable<Causa> CausaCamposNulosInvalida(int quantidadeEntidades = 1)
 		{
 			var faker = new Faker<Causa>(_localidade);
 
 			var causa = faker.CustomInstantiator(f => new Causa());
 
-			return causa;
+			return causa.Generate(quantidadeEntidades);
 		}
 
-		public Causa CausaMaxLengthCamposExcedidoInvalida()
+		public IEnumerable<Causa> CausaMaxLengthCamposExcedidoInvalida(int quantidadeEntidades = 1)
 		{
 			var quantidadeCaracteres = (CausaValidacao.MaxLengthCampos + 1);
 			var faker = new Faker<Causa>(_localidade);
@@ -62,8 +66,27 @@ namespace Vaquinha.Tests.Common.Fixtures
 				.RuleFor(c => c.Cidade, f => f.Lorem.Letter(quantidadeCaracteres))
 				.RuleFor(c => c.Estado, f => f.Lorem.Letter(quantidadeCaracteres));
 
-			return faker.Generate();
+			return faker.Generate(quantidadeEntidades);
 		}
+
+		public IEnumerable<CausaViewModel> CausaViewModelValida(int quantidadeEntidades = 1)
+		{
+			var causas = CausaValida(quantidadeEntidades);
+
+			var causasViewModel = causas.Select(c => new CausaViewModel { Nome = c.Nome, Cidade = c.Cidade, Estado = c.Estado });
+
+			return causasViewModel;
+		}
+
+		public IEnumerable<CausaViewModel> CausaViewModelInvalida(int quantidadeEntidades = 1)
+		{
+			var causas = CausaVaziaInvalida();
+			var causasViewModel = causas.Select(c => new CausaViewModel { Nome = c.Nome, Cidade = c.Cidade, Estado = c.Estado });
+
+			return causasViewModel;
+
+		}
+
 		#endregion
 	}
 }

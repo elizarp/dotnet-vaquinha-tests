@@ -1,6 +1,8 @@
 ﻿using FluentAssertions;
+using System.Collections.Generic;
 using Vaquinha.Tests.Common.Fixtures;
 using Xunit;
+using System.Linq;
 
 namespace Vaquinha.Unit.Tests.DomainTests
 {
@@ -25,7 +27,7 @@ namespace Vaquinha.Unit.Tests.DomainTests
 		public void CausaPreenchidaCorretamente_Valida()
 		{
 			// Arrange
-			var causa = _fixture.CausaValida();
+			var causa = _fixture.CausaValida().FirstOrDefault();
 
 			// Act
 			var valido = causa.Valido();
@@ -41,7 +43,7 @@ namespace Vaquinha.Unit.Tests.DomainTests
 		public void CausaPreenchidaCamposNulos_Invalida()
 		{
 			// Arrange
-			var causa = _fixture.CausaCamposNulosInvalida();
+			var causa = _fixture.CausaCamposNulosInvalida().FirstOrDefault();
 
 			// Act
 			var valido = causa.Valido();
@@ -57,7 +59,7 @@ namespace Vaquinha.Unit.Tests.DomainTests
 		public void CausaCamposEmBranco_Invalida()
 		{
 			// Arrange
-			var causa = _fixture.CausaVaziaInvalida();
+			var causa = _fixture.CausaVaziaInvalida().FirstOrDefault();
 
 			// Act
 			var valido = causa.Valido();
@@ -73,7 +75,7 @@ namespace Vaquinha.Unit.Tests.DomainTests
 		public void CamposComQuantidadeCaracteresExcecida_Invalida()
 		{
 			// Arrange
-			var causa = _fixture.CausaMaxLengthCamposExcedidoInvalida();
+			var causa = _fixture.CausaMaxLengthCamposExcedidoInvalida().FirstOrDefault();
 
 			// Act
 			var valido = causa.Valido();
