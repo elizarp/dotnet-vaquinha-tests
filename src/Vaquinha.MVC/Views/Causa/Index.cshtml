@@ -1,0 +1,42 @@
+﻿@using System.Globalization
+@model IEnumerable<Vaquinha.Domain.ViewModels.CausaViewModel>;
+
+@{
+	ViewData["Title"] = "Causas";
+}
+
+<div class="container">
+	<h3> Causas </h3>
+	<p>
+
+	</p>
+	<table class="table">
+		<tr class="table">
+			<th class="modal-header">
+				@Html.DisplayNameFor(m => m.Nome)
+			</th>
+			<th>
+				@Html.DisplayNameFor(m => m.Cidade)
+			</th>
+			<th>
+				@Html.DisplayNameFor(m => m.Estado)
+			</th>
+			<th>
+				@Html.ActionLink(linkText: "+", actionName: "Create", controllerName: "Causa", routeValues: null, new { @class = "btn btn-yellow btn-sm", @title = "Criar nova causa." })
+			</th>
+			<th></th>
+		</tr>
+
+		@foreach (var item in Model)
+		{
+			<tr class="flex-sm-row">
+				<td>@Html.DisplayFor(m => item.Nome)</td>
+				<td>@Html.DisplayFor(m => item.Cidade)</td>
+				<td>@Html.DisplayFor(m => item.Estado)</td>
+				<td></td>
+				<td></td>
+			</tr>
+		}
+	</table>
+
+</div>

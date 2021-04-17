@@ -1,0 +1,35 @@
+﻿@using System.Globalization
+@model Vaquinha.Domain.ViewModels.CausaViewModel
+
+@{
+	ViewData["Title"] = "Nova Causa";
+}
+
+<div class="container">
+
+	@using (Html.BeginForm(actionName: "Create", controllerName: "Causa", method: FormMethod.Post, htmlAttributes: new { @class = "form-horizontal" }))
+	{
+		<div class="form-group col-md-10">
+			<div class="row">
+				@Html.LabelFor(m => m.Nome)
+				@Html.TextBoxFor(m => m.Nome, new { @class = "form-control", @placeholder = "Nome" })
+			</div>
+		</div>
+		<div class="form-group col-md-10">
+			<div class="row">
+				@Html.LabelFor(m => m.Cidade)
+				@Html.TextBoxFor(m => m.Cidade, new { @class = "form-control", @placeholder = "Cidade" })
+			</div>
+		</div>
+		<div class="form-group col-md-10">
+			<div class="row">
+				@Html.LabelFor(m => m.Estado)
+				@Html.TextBoxFor(m => m.Estado, new { @class = "form-control", @placeholder = "Estado" })
+			</div>
+		</div>
+
+		<div class="form-group col-md-10 text-sm-right">
+			<input type="submit" value="Salvar" class="btn btn-yellow" />
+		</div>
+	}
+</div>
